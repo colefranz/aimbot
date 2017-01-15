@@ -1,16 +1,19 @@
 <!doctype html>
 <html>
-<head>
-	<link rel="stylesheet" type="text/css" href="main.css">
-  <script src="../js/angular/angular.min.js"></script>
-  <script src="main.js"></script>
-  <script src="numberField/numberField.js"></script>
-</head>
-<body ng-app="aimbot">
-  <div id="main" ng-controller="aimbotController">
-    <start-screen ng-if="!gameState.gameActive"></start-screen>
-    <game-directive ng-if="gameState.gameActive"></game-directive>
-    <scoreboard></scoreboard>
-  </div>
-</body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="../js/angular/angular.min.js"></script>
+    <script src="main.js"></script>
+    <script src="directives/aimTarget.js"></script>
+    <script src="directives/gameArea.js"></script>
+    <script src="directives/scoreboard.js"></script>
+    <script src="directives/startScreen.js"></script>
+  </head>
+  <body ng-app="aimbot">
+    <div id="main" ng-controller="aimbotController">
+      <start-screen ng-if="!gameState.gameActive"></start-screen>
+      <game-area ng-if="gameState.gameActive"></game-area>
+      <scoreboard></scoreboard>
+    </div>
+  </body>
 </html>

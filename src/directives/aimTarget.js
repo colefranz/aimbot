@@ -1,0 +1,71 @@
+(function(angular) {
+
+'use strict';
+
+angular.module('aimbot')
+
+.directive('aimTarget', ['gameConstants', function(gameConstants) {
+  return {
+    restrict: 'E',
+    scope: {
+      callback: '&',
+      width: '@',
+      height: '@',
+      guid: '@',
+      paused: '@'
+    },
+    link: function(scope, element) {
+      var onAnimationEnd,
+        onMouseDown,
+        resolveTarget,
+        createTargetElement,
+        top,
+        left;
+
+      createTargetElement = function(elementWidth) {
+        return '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"' +
+          'width="' + elementWidth + 'px"' +
+          'viewBox="0 0 32 32">' +
+          '<circle class="outer-circle" cx="16" cy="16" r="14.5" style="fill:#0f0;stroke:#080"/>' +
+          '<circle class="inner-circle" cx="16" cy="16" r="5" style="fill:#0a0;stroke:#080"/>' +
+          '</svg>';
+      };
+
+      onAnimationEnd = function() {
+        resolveTarget(false);
+      };
+
+      onMouseDown = function() {
+        resolveTarget(true);
+      };
+
+      resolveTarget = function(wasClicked) {
+        scope.callback({
+          'id': scope.guid,
+          'wasClicked': wasClicked
+        });
+        scope.$destroy();
+      };
+
+      element.append(createTargetElement(gameConstants.targetWidth));
+
+      element.on('animationend', onAnimationEnd);
+      element.on('mousedown', onMouseDown);
+      top = Math.random() * (scope.height -
+        gameConstants.targetWidth - gameConstants.scoreBoardHeight);
+      left = Math.random() * (scope.width - gameConstants.targetWidth);
+
+      element.css('top', top + 'px');
+      element.css('left', left + 'px');
+
+      scope.$watch('paused', function(state) {
+        var playState = state === 'true' ? 'paused' : 'running';
+        angular.element(element.find('circle')[0])[0].style.animationPlayState = playState;
+        angular.element(element.find('circle')[1])[0].style.animationPlayState = playState;
+        element[0].style.animationPlayState = 'paused';
+      });
+    }
+  };
+}]);
+
+})(angular);

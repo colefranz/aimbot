@@ -1,0 +1,14 @@
+<div ng-repeat="target in targets track by target">
+  <aim-target callback="updateScore(wasClicked, id)"
+              width="{{width}}"
+              height="{{height}}"
+              guid="{{target}}"
+              paused="{{gameState.gamePaused}}">
+  </aim-target>
+</div>
+<div id="paused-overlay"
+     class="overlay"
+     ng-hide="!gameState.gamePaused">
+  <p id="paused-header">paused</p>
+  <p>press space to unpause</p>
+</div>

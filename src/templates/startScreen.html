@@ -1,0 +1,11 @@
+<div id="start-screen">
+  <button ng-click="startGame()" title="Start Game">
+    Start Game
+  </button>
+  <div id="targets-per-second">
+    <p>Targets/second</p>
+    <input type="number" step=".1" min="1" max="5" ng-model="gameState.targetsPerSecond"/>
+    <p>{{gameState.message}}</p>
+  </div>
+  <p id="losing-message" ng-show="gameState.isLoser">You lost !!</p>
+</div>

@@ -49,25 +49,25 @@ body {
       padding: 20px;
       margin: 20px 0px;
       font-size: 1.1rem; }
-  #main game-directive {
+  #main game-area {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     user-select: initial; }
-    #main game-directive aim-target {
+    #main game-area aim-target {
       position: absolute;
       pointer-events: none; }
-      #main game-directive aim-target .inner-circle {
+      #main game-area aim-target .inner-circle {
         pointer-events: initial;
         animation: inner-explosion 3s linear; }
-      #main game-directive aim-target .outer-circle {
+      #main game-area aim-target .outer-circle {
         pointer-events: initial;
         animation: outer-explosion 3s linear; }
-      #main game-directive aim-target .outer-circle:hover {
+      #main game-area aim-target .outer-circle:hover {
         fill: red; }
-    #main game-directive .overlay {
+    #main game-area .overlay {
       user-select: none;
       position: absolute;
       top: 0;
@@ -76,37 +76,37 @@ body {
       left: 0;
       opacity: 0.6;
       z-index: 18000; }
-    #main game-directive #paused-overlay {
+    #main game-area #paused-overlay {
       background: #bbb;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center; }
-      #main game-directive #paused-overlay p {
+      #main game-area #paused-overlay p {
         font-size: 1.0rem;
         color: #fff;
         text-transform: uppercase;
         letter-spacing: 2px;
         font-weight: bold; }
-        #main game-directive #paused-overlay p kbd {
+        #main game-area #paused-overlay p kbd {
           border: 2px solid #fff;
           font-size: 1.0rem;
           padding: 4px; }
-        #main game-directive #paused-overlay p#paused-header {
+        #main game-area #paused-overlay p#paused-header {
           font-size: 2.0rem;
           text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc; }
-    #main game-directive #lives-overlay {
+    #main game-area #lives-overlay {
       pointer-events: none;
       background-image: radial-gradient(#ccc, red);
       transition: opacity linear 0.5s;
       opacity: 0; }
-      #main game-directive #lives-overlay.full {
+      #main game-area #lives-overlay.full {
         opacity: 0; }
-      #main game-directive #lives-overlay.two {
+      #main game-area #lives-overlay.two {
         opacity: .05; }
-      #main game-directive #lives-overlay.one {
+      #main game-area #lives-overlay.one {
         opacity: .125; }
-      #main game-directive #lives-overlay.zero {
+      #main game-area #lives-overlay.zero {
         opacity: .5;
         pointer-events: initial; }
   #main #score-board {

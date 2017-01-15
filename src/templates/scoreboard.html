@@ -1,0 +1,15 @@
+<div id="score-board">
+  <ul>
+    <li>Score: {{gameStats.targetsHit.value}}</li>
+    <li>Lives: {{gameStats.lives.value}}</li>
+    <li>Accuracy: {{gameStats.accuracy.value}}%</li>
+  </ul>
+  <div id="button-holder">
+    <button id="pause-button" ng-click="commands.togglePauseGame()" ng-if="gameState.gameActive">
+      {{gameState.gamePaused === true ? "Unpause" : "Pause"}}
+    </button>
+    <button id="end-button" ng-show="gameState.gameActive" ng-click="commands.endGame()">
+      End Game
+    </button>
+  </div>
+</div>
