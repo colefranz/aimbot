@@ -1,0 +1,159 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  cursor: default;
+  width: 640px;
+  height: 460px;
+  user-select: none; }
+
+#main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ddf; }
+  #main #start-screen {
+    display: flex;
+    flex-direction: column;
+    text-align: center; }
+    #main #start-screen button {
+      background: #69f;
+      font-size: 1.3rem;
+      padding: 5px;
+      margin: 20px 0px; }
+      #main #start-screen button:hover {
+        background: #48f; }
+      #main #start-screen button:active {
+        outline: #67f auto 4px; }
+    #main #start-screen #targets-per-second p {
+      margin: 5px;
+      font-size: 1.1rem; }
+    #main #start-screen #targets-per-second input {
+      text-align: center;
+      width: 100%;
+      font-size: 1.1rem; }
+      #main #start-screen #targets-per-second input:active {
+        border: 2px solid #67f; }
+    #main #start-screen #targets-per-second input[type=number]::-webkit-inner-spin-button,
+    #main #start-screen #targets-per-second input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0; }
+    #main #start-screen #losing-message {
+      color: #fff;
+      background: #f44;
+      padding: 20px;
+      margin: 20px 0px;
+      font-size: 1.1rem; }
+  #main game-directive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    user-select: initial; }
+    #main game-directive aim-target {
+      position: absolute;
+      pointer-events: none; }
+      #main game-directive aim-target .inner-circle {
+        pointer-events: initial;
+        animation: inner-explosion 3s linear; }
+      #main game-directive aim-target .outer-circle {
+        pointer-events: initial;
+        animation: outer-explosion 3s linear; }
+      #main game-directive aim-target .outer-circle:hover {
+        fill: red; }
+    #main game-directive .overlay {
+      user-select: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 60px;
+      left: 0;
+      opacity: 0.6;
+      z-index: 18000; }
+    #main game-directive #paused-overlay {
+      background: #bbb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; }
+      #main game-directive #paused-overlay p {
+        font-size: 1.0rem;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: bold; }
+        #main game-directive #paused-overlay p kbd {
+          border: 2px solid #fff;
+          font-size: 1.0rem;
+          padding: 4px; }
+        #main game-directive #paused-overlay p#paused-header {
+          font-size: 2.0rem;
+          text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc; }
+    #main game-directive #lives-overlay {
+      pointer-events: none;
+      background-image: radial-gradient(#ccc, red);
+      transition: opacity linear 0.5s;
+      opacity: 0; }
+      #main game-directive #lives-overlay.full {
+        opacity: 0; }
+      #main game-directive #lives-overlay.two {
+        opacity: .05; }
+      #main game-directive #lives-overlay.one {
+        opacity: .125; }
+      #main game-directive #lives-overlay.zero {
+        opacity: .5;
+        pointer-events: initial; }
+  #main #score-board {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: #69f;
+    align-items: center; }
+    #main #score-board ul {
+      list-style: none;
+      display: flex; }
+      #main #score-board ul li {
+        font-size: 1.0rem;
+        padding: 0px 10px;
+        user-select: none; }
+    #main #score-board #button-holder {
+      margin-left: auto;
+      margin-right: 10px; }
+      #main #score-board #button-holder button {
+        margin: 7px;
+        font-size: 1.0rem;
+        padding: 5px; }
+      #main #score-board #button-holder #pause-button {
+        background: #ee7; }
+      #main #score-board #button-holder #end-button {
+        background: #f69; }
+
+button {
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  cursor: pointer; }
+  button:active {
+    outline-offset: -2px; }
+
+@keyframes inner-explosion {
+  0%, 100% {
+    r: 0; }
+  50% {
+    r: 20%; } }
+@keyframes outer-explosion {
+  0%, 100% {
+    r: 0; }
+  50% {
+    r: 50%; } }
+
+/*# sourceMappingURL=main.css.map */

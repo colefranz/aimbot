@@ -1,0 +1,209 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  cursor: default;
+  width: 640px;
+  height: 460px;
+  user-select: none;
+}
+
+#main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ddf;
+  #start-screen {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    button {
+      background: #69f;
+      font-size: 1.3rem;
+      padding: 5px;
+      margin: 20px 0px;
+      &:hover {
+        background: #48f;
+      }
+      &:active {
+        outline: #67f auto 4px;
+      }
+    }
+    
+    #targets-per-second {
+      p {
+        margin: 5px;
+        font-size: 1.1rem;
+      }
+      input {
+        text-align: center;
+        width: 100%;
+        font-size: 1.1rem;
+        &:active {
+          border: 2px solid #67f;
+        }
+      }
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+    #losing-message {
+      color: #fff;
+      background: #f44;
+      padding: 20px;
+      margin: 20px 0px;
+      font-size: 1.1rem;
+    }
+  }
+  game-directive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    user-select: initial;
+    aim-target {
+      position: absolute;
+      pointer-events: none;
+      .inner-circle {
+        pointer-events: initial;
+        animation: inner-explosion 3s linear;
+      }
+      .outer-circle {
+        pointer-events: initial;
+        animation: outer-explosion 3s linear;
+      }
+      .outer-circle:hover {
+        fill: red;
+      }
+    }
+    .overlay {
+      user-select: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 60px;
+      left: 0;
+      opacity: 0.6;
+      z-index: 18000;
+    }
+    #paused-overlay {
+      background: #bbb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      p {
+        font-size: 1.0rem;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: bold;
+        
+        kbd {
+          border: 2px solid #fff;
+          font-size: 1.0rem;
+          padding: 4px;
+        }
+        
+        &#paused-header {
+          font-size: 2.0rem;
+          text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc;
+        }
+      }
+    }
+    #lives-overlay {
+      pointer-events: none;
+      background-image: radial-gradient(#ccc, red);
+      transition: opacity linear 0.5s;
+      opacity: 0;
+      &.full {
+        opacity: 0;
+      }
+      &.two {
+        opacity: .05;
+      }
+      &.one {
+        opacity: .125;
+      }
+      &.zero {
+        opacity: .5;
+        pointer-events: initial;
+      }
+    }
+  }
+  #score-board {
+      position: absolute;
+      display: flex;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #69f;
+      align-items: center;
+      ul {
+        list-style: none;
+        display: flex;
+        li {
+          font-size: 1.0rem;
+          padding: 0px 10px;
+          user-select: none;
+        }
+      }
+      #button-holder {
+        margin-left: auto;
+        margin-right: 10px;
+        button {
+          margin: 7px;
+          font-size: 1.0rem;
+          padding: 5px;
+        }
+        #pause-button {
+          background: #ee7;
+          &:hover {
+          }
+        }
+        #end-button {
+          background: #f69;
+          &:hover {
+          }
+        }
+      }
+    }
+}
+
+button {
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  
+  &:active {
+    outline-offset: -2px;
+  }
+}
+
+@keyframes inner-explosion {
+  0%, 100% {
+    r: 0;
+  }
+  50% {
+    r: 20%;
+  }
+}
+
+@keyframes outer-explosion {
+  0%, 100% {
+    r: 0;
+  }
+  50% {
+    r: 50%;
+  }
+}

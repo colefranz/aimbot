@@ -1,0 +1,78 @@
+{
+  "maxErrors": 1000000,
+  "excludeFiles": [
+    "node_modules/**",
+    "app/bower_components/**",
+    "build/**",
+    "test_results/**"
+  ],
+  "fileExtensions": [".js"],
+
+  "validateLineBreaks": "LF",
+  "maximumLineLength": {
+    "value": 100,
+    "allowUrlComments": true,
+    "allowRegex": true
+  },
+
+  "disallowKeywords": ["with"],
+  "requireSpacesInConditionalExpression": {
+    "afterTest": true,
+    "beforeConsequent": true,
+    "afterConsequent": true,
+    "beforeAlternate": true
+  },
+  "requireSpacesInAnonymousFunctionExpression": {
+    "beforeOpeningCurlyBrace": true
+  },
+  "disallowSpacesInAnonymousFunctionExpression": {
+    "beforeOpeningRoundBrace": true
+  },
+  "requireSpacesInNamedFunctionExpression": {
+    "beforeOpeningCurlyBrace": true
+  },
+  "disallowSpacesInNamedFunctionExpression": {
+    "beforeOpeningRoundBrace": true
+  },
+  "requireSpacesInFunctionDeclaration": {
+    "beforeOpeningCurlyBrace": true
+  },
+  "requireSpaceBetweenArguments": true,
+  "disallowSpacesInFunctionDeclaration": {
+    "beforeOpeningRoundBrace": true
+  },
+  "disallowSpacesInCallExpression": true,
+  "requireBlocksOnNewline": true,
+  "requirePaddingNewlinesBeforeKeywords": ["if", "while", "for", "return", "try", "switch"],
+  "disallowKeywordsOnNewLine": ["else", "else if", "catch"],
+  "disallowEmptyBlocks": true,
+  "disallowSpacesInsideParentheses": true,
+  "disallowSpaceAfterObjectKeys": true,
+  "requireSpaceBeforeObjectValues": true,
+  "requireSpacesInForStatement": true,
+  "requireCommaBeforeLineBreak": true,
+  "requireOperatorBeforeLineBreak": true,
+  "disallowSpaceBeforePostfixUnaryOperators": true,
+  "disallowMultipleLineStrings": true,
+  "requireMultipleVarDecl": true,
+  "requireVarDeclFirst": true,
+  "disallowTrailingComma": true,
+  "requireCapitalizedConstructors": true,
+  "requireDotNotation": true,
+  "disallowYodaConditions": true,
+  "requireSpaceAfterLineComment": true,
+  "validateParameterSeparator": ", ",
+
+  "jsDoc": {
+    "checkAnnotations": {
+      "preset": "jsdoc3",
+      "extra": {
+        "ngdoc": "some",
+        "restrict": "some",
+        "scope": true,
+        "methodOf": "some",
+        "propertyOf": "some"
+      }
+    }
+  }
+}
