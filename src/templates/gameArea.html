@@ -1,7 +1,6 @@
-<div ng-repeat="target in targets track by target">
+<div id="game-area"
+     ng-repeat="target in targets track by target">
   <aim-target callback="updateScore(wasClicked, id)"
-              width="{{width}}"
-              height="{{height}}"
               guid="{{target}}"
               paused="{{gameState.gamePaused}}">
   </aim-target>

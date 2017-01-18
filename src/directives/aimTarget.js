@@ -9,8 +9,6 @@ angular.module('aimbot')
     restrict: 'E',
     scope: {
       callback: '&',
-      width: '@',
-      height: '@',
       guid: '@',
       paused: '@'
     },
@@ -48,13 +46,12 @@ angular.module('aimbot')
       };
 
       element.append(createTargetElement(gameConstants.targetWidth));
-
       element.on('animationend', onAnimationEnd);
       element.on('mousedown', onMouseDown);
-      top = Math.random() * (scope.height -
+      top = Math.random() * (element.parent()[0].clientHeight -
         gameConstants.targetWidth - gameConstants.scoreBoardHeight);
-      left = Math.random() * (scope.width - gameConstants.targetWidth);
-
+      left = Math.random() * (element.parent()[0].clientWidth - gameConstants.targetWidth);
+      
       element.css('top', top + 'px');
       element.css('left', left + 'px');
 
@@ -62,7 +59,7 @@ angular.module('aimbot')
         var playState = state === 'true' ? 'paused' : 'running';
         angular.element(element.find('circle')[0])[0].style.animationPlayState = playState;
         angular.element(element.find('circle')[1])[0].style.animationPlayState = playState;
-        element[0].style.animationPlayState = 'paused';
+        element[0].style.animationPlayState = playState;
       });
     }
   };

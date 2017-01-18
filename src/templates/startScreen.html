@@ -1,11 +1,21 @@
 <div id="start-screen">
-  <button ng-click="startGame()" title="Start Game">
+  <button ng-click="commands.startGame()" title="Start Game">
     Start Game
   </button>
-  <div id="targets-per-second">
-    <p>Targets/second</p>
-    <input type="number" step=".1" min="1" max="5" ng-model="gameState.targetsPerSecond"/>
-    <p>{{gameState.message}}</p>
+  <div id="config">
+    <div id="targets-per-second">
+      <p>{{config.targetsPerSecond.name}}</p>
+      <input type="number" step=".1" min="1" max="5" ng-model="config.targetsPerSecond.value"/>
+    </div>
+    <div id="acceleration">
+      <label for="acceleration-check">
+        {{config.acceleration.name}}
+        <span class="{{config.acceleration.value === true ? 'active' : ''}}">
+          {{config.acceleration.value === true ? 'ON' : 'OFF' }}
+        <span>
+      </label>
+      <input id="acceleration-check" type="checkbox" ng-model="config.acceleration.value"/>
+    </div>
   </div>
   <p id="losing-message" ng-show="gameState.isLoser">You lost !!</p>
 </div>

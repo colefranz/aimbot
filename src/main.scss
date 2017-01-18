@@ -8,6 +8,11 @@ body {
   user-select: none;
 }
 
+p span label h1 h2 {
+  margin: 0;
+  padding: 0;
+}
+
 #main {
   position: absolute;
   top: 0;
@@ -34,24 +39,51 @@ body {
         outline: #67f auto 4px;
       }
     }
-    
-    #targets-per-second {
-      p {
-        margin: 5px;
-        font-size: 1.1rem;
-      }
-      input {
-        text-align: center;
-        width: 100%;
-        font-size: 1.1rem;
-        &:active {
-          border: 2px solid #67f;
+    #config {
+      width: 180px;
+      border: 1px solid #69f;
+      margin: 4px;
+
+      #targets-per-second {
+        p {
+          margin: 5px;
+          font-size: 1.1rem;
+        }
+        input {
+          text-align: center;
+          width: 80%;
+          font-size: 1.1rem;
+          &:active {
+            border: 2px solid #67f;
+          }
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
         }
       }
-      input[type=number]::-webkit-inner-spin-button,
-      input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+      #acceleration {
+        height: 28px;
+        margin: 3px;
+        label {
+          font-size: 1.1rem;
+          line-height: 28px;
+          cursor: pointer;
+
+          span {
+            font-size: 0.9rem;
+            color: red;
+
+            &.active {
+              color: #fff;
+            }
+          }
+        }
+
+        input[type='checkbox'] {
+          display: none;
+        }
       }
     }
     #losing-message {
@@ -69,19 +101,26 @@ body {
     right: 0;
     bottom: 0;
     user-select: initial;
-    aim-target {
-      position: absolute;
-      pointer-events: none;
-      .inner-circle {
-        pointer-events: initial;
-        animation: inner-explosion 3s linear;
-      }
-      .outer-circle {
-        pointer-events: initial;
-        animation: outer-explosion 3s linear;
-      }
-      .outer-circle:hover {
-        fill: red;
+
+    #game-area {
+      height: 100%;
+      width: 100%;
+      user-select: none;
+      aim-target {
+        position: absolute;
+        z-index: 999999;
+        pointer-events: none;
+        .inner-circle {
+          pointer-events: initial;
+          animation: inner-explosion 3s linear;
+        }
+        .outer-circle {
+          pointer-events: initial;
+          animation: outer-explosion 3s linear;
+        }
+        .outer-circle:hover {
+          fill: red;
+        }
       }
     }
     .overlay {

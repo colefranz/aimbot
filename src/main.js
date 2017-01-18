@@ -4,23 +4,34 @@
 
 var aimbotModule = angular.module('aimbot', []);
 
-aimbotModule.controller('aimbotController', ['$scope', '$document', function($scope, $document) {
+aimbotModule.controller('aimbotController', ['$scope', '$document',
+  function($scope, $document) {
   $scope.gameState = {
     gameActive: false,
-    targetsPerSecond: 2,
     isLoser: false,
     gamePaused: false
   };
 
+  $scope.config = {
+    targetsPerSecond: {
+      name: 'Targets/second',
+      value: 2
+    },
+    acceleration: {
+      name: 'Acceleration',
+      tooltip: 'Increases the number of targets per second gradually.',
+      value: false
+    }
+  };
+
   $scope.gameStats = {
-    targetsHit: {
+    score: {
       name: 'Score',
       value: 0
     },
     lives: {
       name: 'Lives',
-      value: 3,
-      className: 'full'
+      value: 3
     },
     targetsMissed: {
       name: 'Targets Missed',
@@ -36,9 +47,9 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', function($sc
     init: function() {
       $scope.gameState.gamePaused = false;
     },
-    endGame: function() {
+    endGame: function(isLoser) {
       $scope.gameState.gameActive = false;
-      $scope.gameState.isLoser = false;
+      $scope.gameState.isLoser = isLoser || false;
     },
     pauseGame: function() {
       $scope.gameState.gamePaused = true;
@@ -48,6 +59,30 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', function($sc
     },
     togglePauseGame: function() {
       $scope.gameState.gamePaused = !$scope.gameState.gamePaused;
+    },
+    targetMissed: function() {
+      $scope.gameStats.targetsMissed.value++;
+      $scope.$digest();
+    },
+    loseLife: function() {
+      $scope.gameStats.lives.value--;
+
+      if ($scope.gameStats.lives.value <= 0) {
+        $scope.commands.endGame(true);
+      }
+      $scope.$digest();
+    },
+    plusScore: function() {
+      $scope.gameStats.score.value++;
+      $scope.$digest();
+    },
+    startGame: function() {
+      $scope.gameState.gamePaused = false;
+      $scope.gameStats.score.value = 0;
+      $scope.gameStats.targetsMissed.value = 0;
+      $scope.gameStats.lives.value = 3;
+      
+      $scope.gameState.gameActive = true;
     }
   };
 
@@ -56,7 +91,7 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', function($sc
       $scope.commands.endGame();
       event.preventDefault();
       event.stopPropagation();
-    } else if (event.keyCode === 13 || event.keyCode === 32) {
+    } else if (event.keyCode === 32) {
       $scope.commands.togglePauseGame();
     }
   });
