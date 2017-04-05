@@ -9,7 +9,7 @@ angular.module('aimbot')
     restrict: 'E',
     scope: {
       callback: '&',
-      guid: '@',
+      id: '@',
       paused: '@'
     },
     link: function(scope, element) {
@@ -39,7 +39,7 @@ angular.module('aimbot')
 
       resolveTarget = function(wasClicked) {
         scope.callback({
-          'id': scope.guid,
+          'id': scope.id,
           'wasClicked': wasClicked
         });
         scope.$destroy();
@@ -51,7 +51,7 @@ angular.module('aimbot')
       top = Math.random() * (element.parent()[0].clientHeight -
         gameConstants.targetWidth - gameConstants.scoreBoardHeight);
       left = Math.random() * (element.parent()[0].clientWidth - gameConstants.targetWidth);
-      
+
       element.css('top', top + 'px');
       element.css('left', left + 'px');
 

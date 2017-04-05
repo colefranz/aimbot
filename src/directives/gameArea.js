@@ -4,10 +4,11 @@
 
 angular.module('aimbot')
 
-.directive('gameArea', ['$interval', function($interval) {
+.directive('gameArea', ['$timeout', function($timeout) {
     return {
       restrict: 'E',
-      link: function(scope, element) {        
+      link: function(scope, element) {
+        var spawnTimeout;
         scope.targets = [];
 
         function spawnTarget() {
@@ -38,11 +39,28 @@ angular.module('aimbot')
           scope.commands.targetMissed();
         });
 
-        $interval(function() {
+        (function tryToSpawnTarget() {
+          var tps;
+
           if (scope.gameState.gamePaused === false) {
             spawnTarget();
+
+            if (scope.config.acceleration.value === true) {
+              tps = scope.config.targetsPerSecond.value + 0.009;
+              tps = tps.toFixed(2);
+              scope.config.targetsPerSecond.value = parseFloat(tps);
+            }
           }
-        }, 1000 / scope.config.targetsPerSecond);
+
+          spawnTimeout = $timeout(
+            tryToSpawnTarget,
+            1000 / scope.config.targetsPerSecond.value
+          );
+        })();
+
+        scope.$on('$destroy', function() {
+          $timeout.cancel(spawnTimeout);
+        });
       },
       templateUrl: 'templates/gameArea.html'
     };

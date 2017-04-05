@@ -1,2 +1,3 @@
-src/.sass-cache/*
+**/.sass-cache/*
 src/*.map
+node_modules/**

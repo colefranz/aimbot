@@ -3,8 +3,8 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   cursor: default;
-  width: 640px;
-  height: 460px;
+  width: 783px;
+  height: 600px;
   user-select: none; }
 
 p span label h1 h2 {
@@ -146,6 +146,7 @@ p span label h1 h2 {
     background: #69f;
     align-items: center; }
     #main #score-board ul {
+      padding: 2px;
       list-style: none;
       display: flex; }
       #main #score-board ul li {

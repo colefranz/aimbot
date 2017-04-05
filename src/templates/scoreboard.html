@@ -3,6 +3,7 @@
     <li>Score: {{gameStats.score.value}}</li>
     <li>Lives: {{gameStats.lives.value}}</li>
     <li>Accuracy: {{gameStats.accuracy.value}}%</li>
+    <li>{{config.targetsPerSecond.shortName}}: {{config.targetsPerSecond.value}}</li>
   </ul>
   <div id="button-holder">
     <button id="pause-button" ng-click="commands.togglePauseGame()" ng-if="gameState.gameActive">

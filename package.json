@@ -1,0 +1,23 @@
+{
+  "name": "aimbot",
+  "version": "1.0.0",
+  "description": "used to improve accuracy with a mouse making you into a human aimbot",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colefranz/aimbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/colefranz/aimbot/issues"
+  },
+  "homepage": "https://github.com/colefranz/aimbot#readme",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "moment": "^2.18.1"
+  }
+}

@@ -5,10 +5,10 @@
   <div id="config">
     <div id="targets-per-second">
       <p>{{config.targetsPerSecond.name}}</p>
-      <input type="number" step=".1" min="1" max="5" ng-model="config.targetsPerSecond.value"/>
+      <input type="number" step=".1" ng-model="config.targetsPerSecond.value"/>
     </div>
     <div id="acceleration">
-      <label for="acceleration-check">
+      <label title="{{config.acceleration.tooltip}}" for="acceleration-check">
         {{config.acceleration.name}}
         <span class="{{config.acceleration.value === true ? 'active' : ''}}">
           {{config.acceleration.value === true ? 'ON' : 'OFF' }}

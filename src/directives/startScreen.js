@@ -7,7 +7,7 @@ angular.module('aimbot')
 .directive('startScreen', [function() {
   return {
     restrict: 'E',
-    link: function(scope, element) {      
+    link: function(scope, element) {
       element.on('keydown', function(event) {
         if(event.keyCode === 32) {
           event.stopPropagation();
