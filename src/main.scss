@@ -103,20 +103,23 @@ p span label h1 h2 {
     user-select: initial;
 
     #game-area {
-      height: 100%;
-      width: 100%;
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      right: 40px;
+      bottom: 40px;
       user-select: none;
       aim-target {
         position: absolute;
-        z-index: 999999;
+        z-index: 17000;
         pointer-events: none;
         .inner-circle {
           pointer-events: initial;
-          animation: inner-explosion 3s linear;
+          animation: inner-explosion 4s linear;
         }
         .outer-circle {
           pointer-events: initial;
-          animation: outer-explosion 3s linear;
+          animation: outer-explosion 4s linear;
         }
         .outer-circle:hover {
           fill: red;
@@ -146,35 +149,20 @@ p span label h1 h2 {
         letter-spacing: 2px;
         font-weight: bold;
 
-        kbd {
-          border: 2px solid #fff;
-          font-size: 1.0rem;
-          padding: 4px;
-        }
-
         &#paused-header {
           font-size: 2.0rem;
           text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc;
         }
       }
     }
-    #lives-overlay {
+    #timer-overlay {
       pointer-events: none;
-      background-image: radial-gradient(#ccc, red);
-      transition: opacity linear 0.5s;
-      opacity: 0;
-      &.full {
-        opacity: 0;
-      }
-      &.two {
-        opacity: .05;
-      }
-      &.one {
-        opacity: .125;
-      }
-      &.zero {
-        opacity: .5;
-        pointer-events: initial;
+      background: transparent;
+      text-align: center;
+      p {
+        font-size: 60px;
+        color: #ddf;
+        text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
       }
     }
   }
@@ -208,11 +196,13 @@ p span label h1 h2 {
         #pause-button {
           background: #ee7;
           &:hover {
+            background: lighten(#ee7, 20%);
           }
         }
         #end-button {
           background: #f69;
           &:hover {
+            background: lighten(#f69, 20%);
           }
         }
       }

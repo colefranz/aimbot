@@ -1,12 +1,12 @@
-(function(angular) {
-
+(function(angular, moment) {
 'use strict';
 
 var aimbotModule = angular.module('aimbot', []);
 
-aimbotModule.controller('aimbotController', ['$scope', '$document',
-  function($scope, $document) {
-    var customTps;
+aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer',
+  function($scope, $document, Timer) {
+    var customTps,
+        timer;
 
     $scope.gameState = {
       gameActive: false,
@@ -50,23 +50,28 @@ aimbotModule.controller('aimbotController', ['$scope', '$document',
       }
     };
 
+    timer = new Timer($scope.gameStats.time);
+
     $scope.commands = {
       init: function() {
         $scope.gameState.gamePaused = false;
       },
       endGame: function(isLoser) {
+        timer.stop();
         $scope.gameState.gameActive = false;
         $scope.gameState.isLoser = isLoser || false;
         $scope.config.targetsPerSecond.value = customTps;
       },
       pauseGame: function() {
         $scope.gameState.gamePaused = true;
+        timer.pause();
       },
       unpauseGame: function() {
         $scope.gameState.gamePaused = false;
+        timer.unpause();
       },
       togglePauseGame: function() {
-        $scope.gameState.gamePaused = !$scope.gameState.gamePaused;
+        $scope.gameState.gamePaused ? $scope.commands.unpauseGame() : $scope.commands.pauseGame();
       },
       targetMissed: function() {
         $scope.gameStats.targetsMissed.value++;
@@ -91,6 +96,7 @@ aimbotModule.controller('aimbotController', ['$scope', '$document',
         $scope.gameStats.targetsMissed.value = 0;
         $scope.gameStats.lives.value = 3;
 
+        timer.start();
         $scope.gameState.gameActive = true;
       }
     };
@@ -112,4 +118,4 @@ aimbotModule.value('gameConstants', {
   scoreBoardHeight: '60'
 });
 
-})(angular);
+})(angular, moment);

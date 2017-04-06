@@ -79,19 +79,22 @@ p span label h1 h2 {
     bottom: 0;
     user-select: initial; }
     #main game-area #game-area {
-      height: 100%;
-      width: 100%;
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      right: 40px;
+      bottom: 40px;
       user-select: none; }
       #main game-area #game-area aim-target {
         position: absolute;
-        z-index: 999999;
+        z-index: 17000;
         pointer-events: none; }
         #main game-area #game-area aim-target .inner-circle {
           pointer-events: initial;
-          animation: inner-explosion 3s linear; }
+          animation: inner-explosion 4s linear; }
         #main game-area #game-area aim-target .outer-circle {
           pointer-events: initial;
-          animation: outer-explosion 3s linear; }
+          animation: outer-explosion 4s linear; }
         #main game-area #game-area aim-target .outer-circle:hover {
           fill: red; }
     #main game-area .overlay {
@@ -115,27 +118,17 @@ p span label h1 h2 {
         text-transform: uppercase;
         letter-spacing: 2px;
         font-weight: bold; }
-        #main game-area #paused-overlay p kbd {
-          border: 2px solid #fff;
-          font-size: 1.0rem;
-          padding: 4px; }
         #main game-area #paused-overlay p#paused-header {
           font-size: 2.0rem;
           text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc; }
-    #main game-area #lives-overlay {
+    #main game-area #timer-overlay {
       pointer-events: none;
-      background-image: radial-gradient(#ccc, red);
-      transition: opacity linear 0.5s;
-      opacity: 0; }
-      #main game-area #lives-overlay.full {
-        opacity: 0; }
-      #main game-area #lives-overlay.two {
-        opacity: .05; }
-      #main game-area #lives-overlay.one {
-        opacity: .125; }
-      #main game-area #lives-overlay.zero {
-        opacity: .5;
-        pointer-events: initial; }
+      background: transparent;
+      text-align: center; }
+      #main game-area #timer-overlay p {
+        font-size: 60px;
+        color: #ddf;
+        text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px; }
   #main #score-board {
     position: absolute;
     display: flex;
@@ -162,8 +155,12 @@ p span label h1 h2 {
         padding: 5px; }
       #main #score-board #button-holder #pause-button {
         background: #ee7; }
+        #main #score-board #button-holder #pause-button:hover {
+          background: #f9f9d2; }
       #main #score-board #button-holder #end-button {
         background: #f69; }
+        #main #score-board #button-holder #end-button:hover {
+          background: #ffccdd; }
 
 button {
   border-radius: 4px;
