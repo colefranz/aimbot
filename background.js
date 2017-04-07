@@ -9,7 +9,6 @@
         height = 600;
 
     chrome.storage.sync.get(windowedKey, function(items) {
-      console.log(items);
       var windowed = items[windowedKey];
 
       if (windowed === true) {
