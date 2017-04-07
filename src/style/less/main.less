@@ -1,10 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 
-$main-yellow: #FFE74C;
-$main-red: #FF5964;
-$background-color: #EBF2FA;
-$main-green: #6BF178;
-$main-blue: #35A7FF;
+@main-yellow: #FFE74C;
+@main-red: #FF5964;
+@background-color: #EBF2FA;
+@main-green: #6BF178;
+@main-blue: #35A7FF;
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -26,7 +26,7 @@ p span label h1 h2 {
   left: 0;
   right: 0;
   bottom: 0;
-  background: $background-color;
+  background: @background-color;
   #start-screen {
     width: 100%;
     height: 100%;
@@ -41,14 +41,14 @@ p span label h1 h2 {
       cursor: pointer;
 
       > svg {
-        fill: $main-blue;
+        fill: @main-blue;
         width: 32px;
         height: 32px;
       }
 
       &:hover {
         > svg {
-          fill: mix($background-color, $main-green, 20%);
+          fill: mix(@background-color, @main-green, 20%);
         }
       }
     }
@@ -65,7 +65,7 @@ p span label h1 h2 {
       display: flex;
       flex-direction: column;
       text-align: center;
-      background: $main-blue;
+      background: @main-blue;
 
       &.active {
         transform: translate(0%, 0%);
@@ -75,13 +75,13 @@ p span label h1 h2 {
 
       .options-toggle {
         > svg {
-          fill: $background-color;
+          fill: @background-color;
           width: 32px;
           height: 32px;
         }
         &:hover {
           > svg {
-            fill: mix($background-color, $main-red, 20%);
+            fill: mix(@background-color, @main-red, 20%);
           }
         }
       }
@@ -92,12 +92,12 @@ p span label h1 h2 {
       flex-direction: column;
       text-align: center;
       button {
-        background: $main-blue;
+        background: @main-blue;
         font-size: 1.3rem;
         padding: 5px;
         margin: 20px 0px;
         &:hover {
-          background: #48f;
+          background: @main-blue;
         }
         &:active {
           outline: #67f auto 4px;
@@ -105,7 +105,7 @@ p span label h1 h2 {
       }
       #config {
         width: 180px;
-        border: 1px solid $main-blue;
+        border: 1px solid @main-blue;
         margin: 4px;
 
         #targets-per-second {
@@ -137,10 +137,10 @@ p span label h1 h2 {
 
             span {
               font-size: 0.9rem;
-              color: red;
+              color: @main-red;
 
               &.active {
-                color: #fff;
+                color: @main-green;
               }
             }
           }
@@ -152,7 +152,7 @@ p span label h1 h2 {
       }
       #losing-message {
         color: #fff;
-        background: #f44;
+        background: @main-red;
         padding: 20px;
         margin: 20px 0px;
         font-size: 1.1rem;
@@ -185,9 +185,6 @@ p span label h1 h2 {
         .outer-circle {
           pointer-events: initial;
           animation: outer-explosion 4s linear;
-        }
-        .outer-circle:hover {
-          fill: red;
         }
       }
     }
@@ -226,7 +223,7 @@ p span label h1 h2 {
       text-align: center;
       p {
         font-size: 60px;
-        color: $background-color;
+        color: @background-color;
         text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
       }
     }
@@ -238,7 +235,7 @@ p span label h1 h2 {
       left: 0;
       right: 0;
       height: 60px;
-      background: $main-blue;
+      background: @main-blue;
       align-items: center;
       ul {
         padding: 2px;
@@ -259,15 +256,17 @@ p span label h1 h2 {
           padding: 5px;
         }
         #pause-button {
-          background: #ee7;
+          background: @main-yellow;
+          border: 2px solid @main-yellow;
           &:hover {
-            background: lighten(#ee7, 20%);
+            border-color: @background-color;
           }
         }
         #end-button {
-          background: #f69;
+          background: @main-red;
+          border: 2px solid @main-red;
           &:hover {
-            background: lighten(#f69, 20%);
+            border-color: @background-color;
           }
         }
       }

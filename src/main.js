@@ -3,8 +3,8 @@
 
 var aimbotModule = angular.module('aimbot', []);
 
-aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer',
-  function($scope, $document, Timer) {
+aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'configConstants',
+  function($scope, $document, Timer, configConstants) {
     var customTps,
         timer;
 
@@ -14,18 +14,7 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer',
       gamePaused: false
     };
 
-    $scope.config = {
-      targetsPerSecond: {
-        name: 'Targets/second',
-        shortName: 'Targets/s',
-        value: 2
-      },
-      acceleration: {
-        name: 'Acceleration',
-        tooltip: 'Increases the number of targets per second gradually.',
-        value: true
-      }
-    };
+    $scope.config = configConstants.competitive;
 
     $scope.gameStats = {
       score: {
@@ -115,6 +104,20 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer',
 aimbotModule.value('gameConstants', {
   targetWidth: '64',
   scoreBoardHeight: '60'
+});
+aimbotModule.value('configConstants', {
+  competitive: {
+    targetsPerSecond: {
+      name: 'Targets/second',
+      shortName: 'Targets/s',
+      value: 2
+    },
+    acceleration: {
+      name: 'Acceleration',
+      tooltip: 'Increases the number of targets per second gradually.',
+      value: true
+    }
+  }
 });
 
 })(angular, moment);

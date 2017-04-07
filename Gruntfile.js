@@ -18,12 +18,12 @@ module.exports = function(grunt) {
       }
     },
 
-    sass: {
+    less: {
       dev: {
         files: [{
           expand: true,
-          cwd: 'src/style/scss',
-          src: '**/*.scss',
+          cwd: 'src/style/less',
+          src: '**/*.less',
           dest: 'build/css',
           ext: '.css'
         }]
@@ -96,8 +96,8 @@ module.exports = function(grunt) {
         tasks:  ['uglify']
       },
       styles: {
-        files: ['src/style/scss/**/*.scss'],
-        tasks: ['sass']
+        files: ['src/style/less/**/*.less'],
+        tasks: ['less']
       },
       markup: {
         files: ['src/**/*.html', 'svg/ink/*'],
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
 
   // load plugins
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-svgmin');
