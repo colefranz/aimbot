@@ -2,9 +2,14 @@
   "bitwise": true,
   "camelcase": true,
   "curly": true,
+  "devel": true,
   "eqeqeq": true,
   "forin": true,
   "freeze": true,
+  "globals": {
+    "chrome": true,
+    "screen": true
+  },
   "immed": true,
   "latedef": "nofunc",
   "newcap": true,

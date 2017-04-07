@@ -41,21 +41,67 @@ module.exports = function(grunt) {
       }
     },
 
+    svgmin: {
+      options: {
+        plugins: []
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'svg/ink',
+          src: '*.svg',
+          dest: 'svg/svg-opt'
+        }]
+      }
+    },
+
+    svgstore: {
+      default: {
+        files: {
+          'build/defs.svg': ['svg/svg-opt/*.svg']
+        }
+      }
+    },
+
+    replace: {
+      dist: {
+        options: {
+          patterns: [
+            {
+              match: 'svg-replace',
+              replacement: function() {
+                return grunt.file.read('build/defs.svg');
+              }
+            }
+          ]
+        },
+        files: [
+          {
+            expand: true,
+            flatten: true,
+            src: ['build/aimbot.html'],
+            dest: 'build/'
+          }
+        ]
+      }
+    },
+
     watch: {
       options: {
-        livereload: true
+        livereload: true,
+        atBegin: true
       },
       client: {
         files: ['src/**/*.js'],
         tasks:  ['uglify']
       },
       styles: {
-        files: ['src/style/scss/**/*.less'],
+        files: ['src/style/scss/**/*.scss'],
         tasks: ['sass']
       },
       markup: {
-        files: ['src/**/*.html'],
-        tasks: ['copy']
+        files: ['src/**/*.html', 'svg/ink/*'],
+        tasks: ['copy', 'svgmin', 'svgstore', 'replace']
       }
     }
   });
@@ -65,7 +111,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-svgmin');
+  grunt.loadNpmTasks('grunt-svgstore');
+  grunt.loadNpmTasks('grunt-replace');
 
   // register tasks
-  grunt.registerTask('serve', ['uglify', 'sass', 'copy', 'watch']);
+  grunt.registerTask('serve', ['watch']);
 };

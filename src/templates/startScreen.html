@@ -1,21 +1,28 @@
 <div id="start-screen">
-  <button ng-click="commands.startGame()" title="Start Game">
-    Start Game
-  </button>
-  <div id="config">
-    <div id="targets-per-second">
-      <p>{{config.targetsPerSecond.name}}</p>
-      <input type="number" step=".1" ng-model="config.targetsPerSecond.value"/>
-    </div>
-    <div id="acceleration">
-      <label title="{{config.acceleration.tooltip}}" for="acceleration-check">
-        {{config.acceleration.name}}
-        <span class="{{config.acceleration.value === true ? 'active' : ''}}">
-          {{config.acceleration.value === true ? 'ON' : 'OFF' }}
-        <span>
-      </label>
-      <input id="acceleration-check" type="checkbox" ng-model="config.acceleration.value"/>
-    </div>
+  <div class="options-toggle"
+       ng-click="toggleOpenOptions()">
+       OPEN ME
   </div>
-  <p id="losing-message" ng-show="gameState.isLoser">You lost !!</p>
+  <options ng-class="{active: optionsIsOpen}"></options>
+  <div id="start-screen-body">
+    <button ng-click="commands.startGame()" title="Start Game">
+      Start Game
+    </button>
+    <div id="config">
+      <div id="targets-per-second">
+        <p>{{config.targetsPerSecond.name}}</p>
+        <input type="number" step=".1" ng-model="config.targetsPerSecond.value"/>
+      </div>
+      <div id="acceleration">
+        <label title="{{config.acceleration.tooltip}}" for="acceleration-check">
+          {{config.acceleration.name}}
+          <span class="{{config.acceleration.value === true ? 'active' : ''}}">
+            {{config.acceleration.value === true ? 'ON' : 'OFF' }}
+          <span>
+        </label>
+        <input id="acceleration-check" type="checkbox" ng-model="config.acceleration.value"/>
+      </div>
+    </div>
+    <p id="losing-message" ng-show="gameState.isLoser">You lost !!</p>
+  </div>
 </div>

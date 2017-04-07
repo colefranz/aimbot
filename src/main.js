@@ -112,7 +112,12 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer',
     });
   }
 ]);
+  // function syncStorage(key, value) {
+  //   var keyValuePair = {};
 
+  //   keyValuePair[appId + key] = value;
+  //   chrome.storage.sync.set(keyValuePair);
+  // }
 aimbotModule.value('gameConstants', {
   targetWidth: '64',
   scoreBoardHeight: '60'
