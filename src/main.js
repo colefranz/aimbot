@@ -11,10 +11,11 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'co
     $scope.gameState = {
       gameActive: false,
       isLoser: false,
-      gamePaused: false
+      gamePaused: false,
+      custom: false
     };
 
-    $scope.config = configConstants.competitive;
+    $scope.config = configConstants.getCompetitive();
 
     $scope.gameStats = {
       score: {
@@ -42,8 +43,9 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'co
     timer = new Timer($scope.gameStats.time);
 
     $scope.commands = {
-      init: function() {
-        $scope.gameState.gamePaused = false;
+      startCompetitiveGame: function() {
+        $scope.config = configConstants.getCompetitive();
+        startGame();
       },
       endGame: function(isLoser) {
         timer.stop();
@@ -78,16 +80,7 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'co
         $scope.gameStats.score.value++;
         $scope.$digest();
       },
-      startGame: function() {
-        customTps = $scope.config.targetsPerSecond.value;
-        $scope.gameState.gamePaused = false;
-        $scope.gameStats.score.value = 0;
-        $scope.gameStats.targetsMissed.value = 0;
-        $scope.gameStats.lives.value = 3;
-
-        timer.start();
-        $scope.gameState.gameActive = true;
-      }
+      startGame: startGame
     };
 
     $document.on('keydown', function(event) {
@@ -99,6 +92,17 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'co
         $scope.commands.togglePauseGame();
       }
     });
+
+    function startGame() {
+      customTps = $scope.config.targetsPerSecond.value;
+      $scope.gameState.gamePaused = false;
+      $scope.gameStats.score.value = 0;
+      $scope.gameStats.targetsMissed.value = 0;
+      $scope.gameStats.lives.value = 3;
+
+      timer.start();
+      $scope.gameState.gameActive = true;
+    }
   }
 ]);
 aimbotModule.value('gameConstants', {
@@ -106,16 +110,18 @@ aimbotModule.value('gameConstants', {
   scoreBoardHeight: '60'
 });
 aimbotModule.value('configConstants', {
-  competitive: {
-    targetsPerSecond: {
-      name: 'Targets/second',
-      shortName: 'Targets/s',
-      value: 2
-    },
-    acceleration: {
-      name: 'Acceleration',
-      tooltip: 'Increases the number of targets per second gradually.',
-      value: true
+  getCompetitive: function() {
+    return {
+      targetsPerSecond: {
+        name: 'Targets/second',
+        shortName: 'Targets/s',
+        value: 2
+      },
+      acceleration: {
+        name: 'Acceleration',
+        tooltip: 'Increases the number of targets per second gradually.',
+        value: true
+      }
     }
   }
 });

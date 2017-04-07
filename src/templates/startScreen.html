@@ -5,10 +5,15 @@
   </div>
   <options ng-class="{active: optionsIsOpen}"></options>
   <div id="start-screen-body">
-    <button ng-click="commands.startGame()" title="Start Game">
-      Start Game
-    </button>
-    <div id="config">
+    <div id="start-buttons" class="vertical-holder">
+      <button ng-click="commands.startCompetitiveGame()" title="Start Game">
+        Competitive
+      </button>
+      <button ng-click="gameState.custom = !gameState.custom" title="Start Game">
+        Start Game
+      </button>
+    </div>
+    <div id="config" ng-show="gameState.custom" class="vertical-holder">
       <div id="targets-per-second">
         <p>{{config.targetsPerSecond.name}}</p>
         <input type="number" step=".1" ng-model="config.targetsPerSecond.value"/>
@@ -23,6 +28,6 @@
         <input id="acceleration-check" type="checkbox" ng-model="config.acceleration.value"/>
       </div>
     </div>
-    <p id="losing-message" ng-show="gameState.isLoser">You lost !!</p>
   </div>
+  <p id="losing-message" ng-show="gameState.isLoser">You lost !!</p>
 </div>
