@@ -14,12 +14,17 @@
       </button>
     </div>
     <div id="config" class="vertical-holder">
+      <div class="controls">
       <button ng-click="gameState.custom = false" class="back-button" title="Back">
         <svg><use xlink:href="#icon-back"></use></svg>
       </button>
+      <button ng-click="commands.startGame()" class="start-button" title="Start Game">
+        <span>Play</span><svg><use xlink:href="#icon-start"></use></svg>
+      </button>
+      </div>
       <div id="targets-per-second">
         <p>{{config.targetsPerSecond.name}}</p>
-        <input type="number" step=".1" ng-model="config.targetsPerSecond.value"/>
+        <input type="number" ng-model="config.targetsPerSecond.value"/>
       </div>
       <div id="acceleration">
         <label title="{{config.acceleration.tooltip}}" for="acceleration-check">
@@ -30,9 +35,6 @@
         </label>
         <input id="acceleration-check" type="checkbox" ng-model="config.acceleration.value"/>
       </div>
-      <button ng-click="commands.startGame()" class="start-button" title="Start Game">
-        <span>Play</span><svg><use xlink:href="#icon-start"></use></svg>
-      </button>
     </div>
   </div>
   <p id="losing-message" ng-show="gameState.isLoser">You lost !!</p>

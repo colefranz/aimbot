@@ -24,8 +24,8 @@ angular.module('aimbot')
         return '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"' +
           'width="' + elementWidth + 'px"' +
           'viewBox="0 0 32 32">' +
-          '<circle class="outer-circle" cx="16" cy="16" r="14.5" style="fill:#0f0;stroke:#080"/>' +
-          '<circle class="inner-circle" cx="16" cy="16" r="5" style="fill:#0a0;stroke:#080"/>' +
+          '<circle class="outer-circle" cx="16" cy="16" r="14.5" />' +
+          '<circle class="inner-circle" cx="16" cy="16" r="5" />' +
           '</svg>';
       };
 

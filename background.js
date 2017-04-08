@@ -1,11 +1,11 @@
 (function(chrome) {
-  'use strict';
+  'use strict'
 
   chrome.browserAction.onClicked.addListener(function() {
 
-    chrome.browserAction.setPopup({
-      popup: 'build/aimbot.html'
-    });
+    // chrome.browserAction.setPopup({
+    //   popup: 'build/aimbot.html'
+    // });
     // var windowedKey = 'aimbot-windowed',
     //     screenWidth = screen.availWidth,
     //     screenHeight = screen.availHeight,

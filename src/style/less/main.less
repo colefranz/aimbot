@@ -130,9 +130,6 @@ p span label h1 h2 {
           margin: 20px 0px;
           color: @main-white;
 
-          &:hover {
-            background: @main-blue;
-          }
           &:active {
             outline: darken(@main-blue, 20%) auto 4px;
           }
@@ -142,25 +139,52 @@ p span label h1 h2 {
       #config {
         transform: rotateY(180deg);
 
-        .back-button {
-          height: 32px;
-          padding: 0px 5px;
-          background: @main-blue;
-          align-self: flex-start;
+        .controls {
+          display: flex;
+          justify-content: space-between;
           margin-bottom: 20px;
 
-          > svg {
-            fill: @main-white;
-            width: 32px;
-            height: 32px;
+          button {
+            background: @main-blue;
+            padding: 5px;
+
+            > svg {
+              fill: @main-white;
+              width: 32px;
+              height: 32px;
+              vertical-align: middle;
+            }
+
+            &:hover {
+              > svg {
+                animation: 0.5s pop-in;
+              }
+            }
+
           }
 
-          &:hover {
+          .start-button {
+            color: @main-white;
+            padding-left: 10px;
+
+            span {
+              display: inline-block;
+              font-size: 1.2rem;
+              vertical-align: middle;
+            }
+
             > svg {
-              animation: 0.5s pop-in;
+              transition: fill 0.5s ease-out;
+            }
+
+            &:hover {
+              > svg {
+                fill: @main-green;
+              }
             }
           }
         }
+
         #targets-per-second {
           p {
             margin: 5px;
@@ -202,36 +226,6 @@ p span label h1 h2 {
             display: none;
           }
         }
-
-        .start-button {
-          align-self: flex-end;
-          background: @main-blue;
-          color: @main-white;
-          margin-top: 20px;
-          padding: 5px;
-          padding-left: 10px;
-
-          span {
-            display: inline-block;
-            font-size: 1.2rem;
-            vertical-align: middle;
-          }
-
-          > svg {
-            height: 32px;
-            width: 32px;
-            vertical-align: middle;
-            fill: @main-white;
-            transition: fill 0.5s ease-out;
-          }
-
-          &:hover {
-            > svg {
-              animation: 0.5s pop-out linear;
-              fill: @main-green;
-            }
-          }
-        }
       }
       #losing-message {
         color: @main-white;
@@ -264,10 +258,14 @@ p span label h1 h2 {
         .inner-circle {
           pointer-events: initial;
           animation: inner-explosion 4s linear;
+          fill: darken(@main-green, 30%);
+          stroke: darken(@main-green, 30%);
         }
         .outer-circle {
           pointer-events: initial;
           animation: outer-explosion 4s linear;
+          fill: @main-green;
+          stroke: darken(@main-green, 30%);
         }
       }
     }
