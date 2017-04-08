@@ -1,19 +1,22 @@
 <div id="start-screen">
   <div class="options-toggle"
        ng-click="toggleOpenOptions()">
-    <svg><use xlink:href="#icon-options" style="pointer-events: none"></use></svg>
+    <svg><use xlink:href="#icon-options"></use></svg>
   </div>
   <options ng-class="{active: optionsIsOpen}"></options>
-  <div id="start-screen-body">
-    <div id="start-buttons" class="vertical-holder">
+  <div id="start-screen-body" ng-class="{custom: gameState.custom}">
+    <div id="start-buttons" class="vertical-holder" >
       <button ng-click="commands.startCompetitiveGame()" title="Start Game">
         Competitive
       </button>
-      <button ng-click="gameState.custom = !gameState.custom" title="Start Game">
-        Start Game
+      <button ng-click="gameState.custom = true" title="Start Game">
+        Custom Mode
       </button>
     </div>
-    <div id="config" ng-show="gameState.custom" class="vertical-holder">
+    <div id="config" class="vertical-holder">
+      <button ng-click="gameState.custom = false" class="back-button" title="Back">
+        <svg><use xlink:href="#icon-back"></use></svg>
+      </button>
       <div id="targets-per-second">
         <p>{{config.targetsPerSecond.name}}</p>
         <input type="number" step=".1" ng-model="config.targetsPerSecond.value"/>
@@ -27,6 +30,9 @@
         </label>
         <input id="acceleration-check" type="checkbox" ng-model="config.acceleration.value"/>
       </div>
+      <button ng-click="commands.startGame()" class="start-button" title="Start Game">
+        <span>Play</span><svg><use xlink:href="#icon-start"></use></svg>
+      </button>
     </div>
   </div>
   <p id="losing-message" ng-show="gameState.isLoser">You lost !!</p>
