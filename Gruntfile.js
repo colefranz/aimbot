@@ -20,13 +20,9 @@ module.exports = function(grunt) {
 
     less: {
       dev: {
-        files: [{
-          expand: true,
-          cwd: 'src/style/less',
-          src: '**/*.less',
-          dest: 'build/css',
-          ext: '.css'
-        }]
+        files: {
+          'build/css/all.css': 'src/style/less/main.less'
+        }
       }
     },
 

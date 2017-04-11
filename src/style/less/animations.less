@@ -1,0 +1,51 @@
+@keyframes inner-explosion {
+  0%, 100% {
+    r: 0;
+  }
+  50% {
+    r: 20%;
+  }
+}
+
+@keyframes outer-explosion {
+  0%, 100% {
+    r: 0;
+  }
+  50% {
+    r: 50%;
+  }
+}
+
+@keyframes pop-in {
+  0%, 100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(.6);
+  }
+  80% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pop-out {
+  0%, 100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.4);
+  }
+  80% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100%  {
+    transform: translateY(0%);
+  }
+}

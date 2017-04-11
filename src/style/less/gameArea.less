@@ -1,0 +1,73 @@
+game-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  user-select: initial;
+
+  #game-area {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    user-select: none;
+    aim-target {
+      position: absolute;
+      z-index: 17000;
+      pointer-events: none;
+      .inner-circle {
+        pointer-events: initial;
+        animation: inner-explosion 4s linear;
+        fill: darken(@main-green, 30%);
+        stroke: darken(@main-green, 30%);
+      }
+      .outer-circle {
+        pointer-events: initial;
+        animation: outer-explosion 4s linear;
+        fill: @main-green;
+        stroke: darken(@main-green, 30%);
+      }
+    }
+  }
+  .overlay {
+    user-select: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: @scoreboard-height;
+    left: 0;
+    opacity: 0.6;
+    z-index: 18000;
+  }
+  #paused-overlay {
+    background: #bbb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    p {
+      font-size: 1.0rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: bold;
+
+      &#paused-header {
+        font-size: 2.0rem;
+        text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc;
+      }
+    }
+  }
+  #timer-overlay {
+    pointer-events: none;
+    background: transparent;
+    text-align: center;
+    p {
+      font-size: 60px;
+      color: @main-white;
+      text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
+    }
+  }
+}
