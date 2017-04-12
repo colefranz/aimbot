@@ -1,5 +1,5 @@
-<div id="post-game">
-  {{gameStats.time.value}}
+<div id="post-game" class="vertical-flex">
+  <h2>{{qualityOfTime}} You lasted {{gameStats.time.value}}!</h2>
   <button ng-click="commands.startGame()">Play Again!</button>
-  <button ng-click="commands.goHome()">Home</button>
+  <button class="secondary" ng-click="commands.goHome()">Home</button>
 </div>

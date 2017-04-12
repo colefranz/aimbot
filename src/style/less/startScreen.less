@@ -1,6 +1,6 @@
 #start-screen {
   width: 100%;
-  height: calc(~"100% - " (@scoreboard-height));
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,15 +89,9 @@
 
     #start-buttons {
       button {
-        background: @main-blue;
         font-size: 1.3rem;
         padding: 5px;
         margin: 20px 0px;
-        color: @main-white;
-
-        &:active {
-          outline: darken(@main-blue, 20%) auto 4px;
-        }
       }
     }
 
@@ -110,11 +104,10 @@
         margin-bottom: 20px;
 
         button {
-          background: @main-blue;
           padding: 5px;
 
           > svg {
-            fill: @main-white;
+            fill: @main-blue;
             width: 32px;
             height: 32px;
             vertical-align: middle;
@@ -129,7 +122,6 @@
         }
 
         .start-button {
-          color: @main-white;
           padding-left: 10px;
 
           span {
@@ -140,12 +132,6 @@
 
           > svg {
             transition: fill 0.5s ease-out;
-          }
-
-          &:hover {
-            > svg {
-              fill: @main-green;
-            }
           }
         }
       }

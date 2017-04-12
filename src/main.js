@@ -60,6 +60,7 @@ angular.module('aimbot', ['ngRoute'])
       },
       time: {
         name: 'Time',
+        plain: '',
         value: 0
       }
     };

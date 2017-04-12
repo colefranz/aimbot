@@ -29,7 +29,9 @@ angular.module('aimbot')
     }
 
     function updateTimePlayed() {
-      timeObject.value = formatTime(getTimeSince(startTime));
+      var timePlayed = getTimeSince(startTime);
+      timeObject.value = formatTime(timePlayed);
+      timeObject.plain = timePlayed;
       timeoutRef = $timeout(updateTimePlayed, 32);
     }
 
