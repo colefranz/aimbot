@@ -3,15 +3,15 @@
   <head>
     <link rel="stylesheet" type="text/css" href="./css/all.css">
     <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/angular-route/angular-route.min.js"></script>
     <script src="../node_modules/moment/min/moment.min.js"></script>
     <script src="./aimbot.min.js"></script>
-
+    <base href="/build/aimbot.html">
   </head>
   <body ng-app="aimbot">
     @@svg-replace
     <div id="main" ng-controller="aimbotController">
-      <start-screen ng-if="!gameState.gameActive"></start-screen>
-      <game-area ng-if="gameState.gameActive"></game-area>
+      <ng-view></ng-view>
       <scoreboard></scoreboard>
     </div>
   </body>

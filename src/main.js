@@ -1,16 +1,40 @@
-(function(angular, moment) {
+(function(angular) {
 'use strict';
 
-var aimbotModule = angular.module('aimbot', []);
+angular.module('aimbot', ['ngRoute'])
 
-aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'configConstants',
-  function($scope, $document, Timer, configConstants) {
+.config(['$routeProvider', '$locationProvider',
+  function($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
+    $routeProvider.when('/start', {
+      template: '<start-screen></start-screen>'
+    }).when('/in-game', {
+      template: '<game-area></game-area>'
+    }).when('/post-game', {
+      template: '<post-game></post-game>'
+    }).otherwise({
+      template: '<start-screen></start-screen>'
+    });
+  }
+])
+.controller('aimbotController', [
+  '$scope',
+  '$document',
+  '$location',
+  'Timer',
+  'configConstants',
+  function(
+    $scope,
+    $document,
+    $location,
+    Timer,
+    configConstants
+  ) {
     var customTps,
         timer;
 
     $scope.gameState = {
       gameActive: false,
-      isLoser: false,
       gamePaused: false,
       custom: false
     };
@@ -47,10 +71,10 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'co
         $scope.config = configConstants.getCompetitive();
         startGame();
       },
-      endGame: function(isLoser) {
+      endGame: function() {
+        $location.path('/post-game');
         timer.stop();
         $scope.gameState.gameActive = false;
-        $scope.gameState.isLoser = isLoser || false;
         $scope.config.targetsPerSecond.value = customTps;
       },
       pauseGame: function() {
@@ -72,13 +96,16 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'co
         $scope.gameStats.lives.value--;
 
         if ($scope.gameStats.lives.value <= 0) {
-          $scope.commands.endGame(true);
+          $scope.commands.endGame();
         }
         $scope.$digest();
       },
       plusScore: function() {
         $scope.gameStats.score.value++;
         $scope.$digest();
+      },
+      goHome: function() {
+        $location.path('/start');
       },
       startGame: startGame
     };
@@ -94,6 +121,7 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'co
     });
 
     function startGame() {
+      $location.path('/in-game');
       customTps = $scope.config.targetsPerSecond.value;
       $scope.gameState.gamePaused = false;
       $scope.gameStats.score.value = 0;
@@ -104,12 +132,12 @@ aimbotModule.controller('aimbotController', ['$scope', '$document', 'Timer', 'co
       $scope.gameState.gameActive = true;
     }
   }
-]);
-aimbotModule.value('gameConstants', {
+])
+.value('gameConstants', {
   targetWidth: '64',
   scoreBoardHeight: '60'
-});
-aimbotModule.value('configConstants', {
+})
+.value('configConstants', {
   getCompetitive: function() {
     return {
       targetsPerSecond: {
@@ -126,4 +154,4 @@ aimbotModule.value('configConstants', {
   }
 });
 
-})(angular, moment);
+})(angular);
