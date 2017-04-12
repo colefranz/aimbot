@@ -39,6 +39,7 @@
     flex-direction: column;
     text-align: center;
     background: @main-blue;
+    color: @main-white;
 
     &.active {
       transform: translate(0%, 0%);
@@ -92,6 +93,29 @@
         font-size: 1.3rem;
         padding: 5px;
         margin: 20px 0px;
+
+        .icon {
+          margin-left: 5px;
+
+          svg {
+            * {
+              stroke: @main-white;
+            }
+            path#topper {
+              transition: transform 0.5s;
+              transform: translateY(0px);
+            }
+          }
+        }
+
+        &:hover {
+          svg {
+            animation: none;
+            path#topper {
+              transform: translateY(3px);
+            }
+          }
+        }
       }
     }
 
@@ -104,34 +128,12 @@
         margin-bottom: 20px;
 
         button {
-          padding: 5px;
+          padding: 5px 10px;
+          font-size: 18px;
 
           > svg {
-            fill: @main-blue;
             width: 32px;
             height: 32px;
-            vertical-align: middle;
-          }
-
-          &:hover {
-            > svg {
-              animation: 0.5s pop-in;
-            }
-          }
-
-        }
-
-        .start-button {
-          padding-left: 10px;
-
-          span {
-            display: inline-block;
-            font-size: 1.2rem;
-            vertical-align: middle;
-          }
-
-          > svg {
-            transition: fill 0.5s ease-out;
           }
         }
       }

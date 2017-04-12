@@ -11,32 +11,32 @@
     padding: 2px;
     list-style: none;
     display: flex;
+    color: @main-white;
     li {
       font-size: 1.0rem;
       padding: 0px 10px;
       user-select: none;
     }
   }
+
   #button-holder {
     margin-left: auto;
     margin-right: 10px;
     button {
-      margin: 7px;
+      margin: 5px;
       font-size: 1.0rem;
-      padding: 5px;
+      padding: 3px;
       color: black;
-    }
-    #pause-button {
-      background: @main-yellow;
       &:hover {
-
+        svg {
+          animation: none;
+        }
       }
     }
+
     #end-button {
-      background: @main-red;
-      &:hover {
-
-      }
+      background: @main-white;
+      fill: @main-red;
     }
   }
 }

@@ -6,8 +6,12 @@
 @import "scoreBoard";
 @import "postGame";
 
-svg {
-  pointer-events: none;
+.icon {
+  svg {
+    pointer-events: none;
+    width: 32px;
+    height: 32px;
+  }
 }
 
 body {
@@ -43,13 +47,43 @@ button {
   border: 1px solid @main-blue;
   background: @main-white;
   color: @main-blue;
+  padding: 5px;
+  border-radius: 4px;
+  line-height: 32px;
+  text-align: center;
+  transition: box-shadow 0.25s;
 
   &:active {
     outline-offset: -2px;
   }
 
-  &.secondary {
+  &.primary {
     background: @main-blue;
     color: @main-white;
+    fill: @main-white;
+  }
+
+  &.secondary {
+    color: @main-blue;
+    background: @main-white;
+    fill: @main-blue;
+  }
+
+  > .icon {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+  }
+
+  &:hover {
+    box-shadow: 1px 1px 1px @main-blue;
+    > .icon {
+      > svg {
+        animation: 0.5s pop-in;
+      }
+    }
   }
 }

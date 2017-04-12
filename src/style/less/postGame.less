@@ -5,15 +5,29 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   text-align: center;
 
-  > * {
-    margin: 5px;
+  p {
+    color: @main-blue;
+    font-size: 28px;
+    border-bottom: 1px solid @main-blue;
+    margin: 0;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
   }
 
-  button {
-    padding: 10px;
-    font-size: 1.2em;
+  .buttons {
+    display: flex;
+
+    button {
+      margin: 5px;
+      padding: 5px 10px;
+      font-size: 18px;
+
+      .icon {
+        margin-right: 5px;
+      }
+    }
   }
 }

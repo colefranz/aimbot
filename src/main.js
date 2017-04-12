@@ -68,7 +68,7 @@ angular.module('aimbot', ['ngRoute'])
     timer = new Timer($scope.gameStats.time);
 
     $scope.commands = {
-      startCompetitiveGame: function() {
+      startDefaultGame: function() {
         $scope.config = configConstants.getCompetitive();
         startGame();
       },

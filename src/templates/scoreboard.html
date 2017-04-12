@@ -6,11 +6,21 @@
     <li>{{config.targetsPerSecond.shortName}}: {{config.targetsPerSecond.value}}</li>
   </ul>
   <div id="button-holder">
-    <button id="pause-button" ng-click="commands.togglePauseGame()" ng-if="gameState.gameActive">
-      {{gameState.gamePaused === true ? "Unpause" : "Pause"}}
+    <button id="pause-button"
+            class="secondary"
+            ng-click="commands.togglePauseGame()"
+            ng-if="gameState.gameActive">
+      <div ng-if="gameState.gamePaused" class="icon">
+        <svg><use xlink:href="#icon-play"></use></svg>
+      </div>
+      <div ng-if="!gameState.gamePaused" class="icon">
+        <svg><use xlink:href="#icon-pause"></use></svg>
+      </div>
     </button>
     <button id="end-button" ng-show="gameState.gameActive" ng-click="commands.endGame()">
-      End Game
+      <div class="icon">
+        <svg><use xlink:href="#icon-exit"></use></svg>
+      </div>
     </button>
   </div>
 </div>

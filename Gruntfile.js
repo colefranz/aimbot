@@ -39,7 +39,11 @@ module.exports = function(grunt) {
 
     svgmin: {
       options: {
-        plugins: []
+        plugins: [{
+          mergePaths: false
+        }, {
+          cleanupIDs: false
+        }]
       },
       dist: {
         files: [{
@@ -68,6 +72,12 @@ module.exports = function(grunt) {
               replacement: function() {
                 return grunt.file.read('build/defs.svg');
               }
+            },
+            {
+              match: 'timer-replace',
+              replacement: function() {
+                return grunt.file.read('svg/svg-opt/icon-timer.svg');
+              }
             }
           ]
         },
@@ -77,6 +87,12 @@ module.exports = function(grunt) {
             flatten: true,
             src: ['build/aimbot.html'],
             dest: 'build/'
+          },
+          {
+            expand: true,
+            flatten: true,
+            src: ['build/templates/startScreen.html'],
+            dest: 'build/templates'
           }
         ]
       }
