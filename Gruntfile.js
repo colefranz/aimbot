@@ -13,6 +13,11 @@ module.exports = function(grunt) {
         files: {
           'build/aimbot.min.js': [
             'src/*.js', 'src/*/*.js'
+          ],
+          'build/deps.min.js': [
+            'node_modules/angular/angular.min.js',
+            'node_modules/angular-route/angular-route.min.js',
+            'node_modules/moment/min/moment.min.js'
           ]
         }
       }
