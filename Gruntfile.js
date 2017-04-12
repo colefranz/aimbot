@@ -39,6 +39,13 @@ module.exports = function(grunt) {
           src: '**/*.html',
           dest: 'build'
         }]
+      },
+      prod: {
+        files: [{
+          expand: true,
+          src: ['build/**', 'manifest.json', 'icons/**', 'background.js'],
+          dest: 'prod/'
+        }]
       }
     },
 
@@ -118,7 +125,7 @@ module.exports = function(grunt) {
       },
       markup: {
         files: ['src/**/*.html', 'svg/ink/*'],
-        tasks: ['copy', 'svgmin', 'svgstore', 'replace']
+        tasks: ['copy:main', 'svgmin', 'svgstore', 'replace']
       }
     }
   });
@@ -134,4 +141,13 @@ module.exports = function(grunt) {
 
   // register tasks
   grunt.registerTask('serve', ['watch']);
+  grunt.registerTask('build', [
+    'uglify',
+    'less',
+    'copy',
+    'svgmin',
+    'svgstore',
+    'replace',
+    'copy:prod'
+    ]);
 };
