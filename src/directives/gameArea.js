@@ -1,70 +1,76 @@
 (function(angular) {
+	"use strict";
+	angular.module("aimbot").directive(
+		"gameArea",
+		[
+			"$timeout",
+			function($timeout) {
+				return {
+					restrict: "E",
+					link: function(scope, element) {
+						var spawnTimeout;
+						scope.targets = [];
 
-'use strict';
+						function spawnTarget() {
+							scope.targets.unshift(guid());
+						}
 
-angular.module('aimbot')
+						scope.updateScore = function(wasClicked, id) {
+							scope.targets.splice(scope.targets.indexOf(id), 1);
 
-.directive('gameArea', ['$timeout', function($timeout) {
-    return {
-      restrict: 'E',
-      link: function(scope, element) {
-        var spawnTimeout;
-        scope.targets = [];
+							if (wasClicked === true) {
+								scope.commands.plusScore();
+							} else {
+								scope.commands.loseLife();
+							}
+						};
 
-        function spawnTarget() {
-          scope.targets.unshift(guid());
-        }
+						function guid() {
+							var s4 = function() {
+								return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(
+									1,
+								);
+							};
 
-        scope.updateScore = function(wasClicked, id) {
-          scope.targets.splice(scope.targets.indexOf(id), 1);
+							return s4() + s4();
+						}
 
-          if (wasClicked === true) {
-            scope.commands.plusScore();
-          } else {
-            scope.commands.loseLife();
-          }
-        };
+						element.on(
+							"mousedown",
+							function() {
+								scope.commands.targetMissed();
+							},
+						);
 
-        function guid() {
-          var s4 = function() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-              .toString(16)
-              .substring(1);
-          };
+						(function tryToSpawnTarget() {
+							var tps;
 
-          return s4() + s4();
-        }
+							if (scope.gameState.gamePaused === false) {
+								spawnTarget();
 
-        element.on('mousedown', function() {
-          scope.commands.targetMissed();
-        });
+								if (scope.config.acceleration.value === true) {
+									tps = scope.config.targetsPerSecond.value + 0.009;
+									tps = tps.toFixed(2);
+									scope.config.targetsPerSecond.value = parseFloat(tps);
+								}
+							}
 
-        (function tryToSpawnTarget() {
-          var tps;
+							spawnTimeout = $timeout(
+								tryToSpawnTarget,
+								1_000 / scope.config.targetsPerSecond.value,
+							);
+						})();
 
-          if (scope.gameState.gamePaused === false) {
-            spawnTarget();
-
-            if (scope.config.acceleration.value === true) {
-              tps = scope.config.targetsPerSecond.value + 0.009;
-              tps = tps.toFixed(2);
-              scope.config.targetsPerSecond.value = parseFloat(tps);
-            }
-          }
-
-          spawnTimeout = $timeout(
-            tryToSpawnTarget,
-            1000 / scope.config.targetsPerSecond.value
-          );
-        })();
-
-        scope.$on('$destroy', function() {
-          $timeout.cancel(spawnTimeout);
-        });
-      },
-      templateUrl: 'templates/gameArea.html'
-    };
-  }
-]);
-
+						scope.$on(
+							"$destroy",
+							function() {
+								$timeout.cancel(spawnTimeout);
+							},
+						);
+					},
+					templateUrl: "templates/gameArea.html",
+				};
+			},
+		],
+	);
 })(angular);
