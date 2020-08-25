@@ -4,6 +4,7 @@
   "description": "used to improve accuracy with a mouse making you into a human aimbot",
   "main": "src/main.js",
   "scripts": {
+    "build": "webpack",
     "test": "bower install"
   },
   "repository": {
@@ -17,17 +18,6 @@
   },
   "homepage": "https://github.com/colefranz/aimbot#readme",
   "dependencies": {
-    "angular": "^1.6.4",
-    "angular-route": "^1.6.4",
-    "grunt": "^0.4.5",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-less": "^1.4.1",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-uglify": "^2.3.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-replace": "^1.0.1",
-    "grunt-svgmin": "^4.0.0",
-    "grunt-svgstore": "^1.0.0",
-    "moment": "^2.18.1"
+    "rome": "^10.0.4-beta"
   }
 }
