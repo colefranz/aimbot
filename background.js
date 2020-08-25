@@ -1,3 +1,4 @@
+
 (function(chrome) {
 	"use strict";
 	chrome.browserAction.onClicked.addListener(function() {

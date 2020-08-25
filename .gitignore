@@ -1,6 +1,4 @@
 **/.sass-cache/*
-src/*.map
 node_modules/**
-build/**
-prod/**
-svg/svg-opt/*
+dist/**
+false/
