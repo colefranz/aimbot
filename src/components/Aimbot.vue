@@ -9,7 +9,7 @@ import Vue from "vue";
 
 export default class Aimbot extends Vue {
   helloWorld() {
-    return this.$store.state.helloWorld;
+    return this.$store.state.lives;
   }
 }
 </script>
