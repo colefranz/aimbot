@@ -1,65 +1,65 @@
-const path = require('path');
-const { VueLoaderPlugin } = require('vue-loader')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require("path");
+const { VueLoaderPlugin } = require("vue-loader");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: "./src/index.ts",
   devtool: "inline-source-map",
   performance: { hints: false },
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: "vue-loader",
         options: {
           appendExtension: true,
           loaders: {
-            'scss': 'vue-style-loader!css-loader!sass-loader'
+            scss: "vue-style-loader!css-loader!sass-loader",
           },
         },
       },
       {
         test: /\.ts?$/,
-        loader: 'ts-loader',
+        loader: "ts-loader",
         exclude: /node_modules/,
         options: {
-          appendTsSuffixTo: [/\.vue$/]
-        }
+          appendTsSuffixTo: [/\.vue$/],
+        },
       },
       {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          "css-loader",
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: "sass-loader",
+          },
+        ],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
+          name: "[name].[ext]?[hash]",
+        },
+      },
     ],
   },
   resolve: {
-    extensions: [ '.ts', '.js', '.vue' ],
+    extensions: [".ts", ".js", ".vue"],
     alias: {
-      '@components': path.resolve(__dirname, 'src/components/'),
-      '@stores': path.resolve(__dirname, 'src/stores/')
-    }
+      "@components": path.resolve(__dirname, "src/components/"),
+      "@stores": path.resolve(__dirname, "src/stores/"),
+    },
   },
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'style.css'
-    })
-  ]
+      filename: "style.css",
+    }),
+  ],
 };

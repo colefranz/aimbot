@@ -1,15 +1,22 @@
 <template>
   <div id="aimbot">
-    {{ helloWorld() }}
+    <!-- Ghetto router -->
+    <GameView v-if="inGame()"></GameView>
+    <StartView v-else></StartView>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Vue, Component } from "vue-property-decorator";
+import GameView from "@components/game-view.vue";
+import StartView from "@components/start-view.vue";
 
+@Component({
+  components: { GameView, StartView }
+})
 export default class Aimbot extends Vue {
-  helloWorld() {
-    return this.$store.state.lives;
+  inGame() {
+    return this.$store.state.inGame;
   }
 }
 </script>
