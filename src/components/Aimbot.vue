@@ -1,40 +1,57 @@
 <template>
   <div id="aimbot">
-    <!-- Ghetto router -->
-    <GameView v-if="inGame()"></GameView>
-    <StartView v-else></StartView>
+    <GameView v-if="displayGameView()"></GameView>
+    <MainMenu v-else></MainMenu>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import GameView from "@components/game-view.vue";
-import StartView from "@components/start-view.vue";
+import MainMenu from "@components/main-menu.vue";
+import { Views } from "@stores/main-store";
 
 @Component({
-  components: { GameView, StartView }
+  components: { GameView, MainMenu },
 })
 export default class Aimbot extends Vue {
-  inGame() {
-    return this.$store.state.inGame;
+  displayGameView() {
+    return this.$store.state.currentView === Views.GameView;
   }
 }
 </script>
 
 <style lang="scss">
-#aimbot {
+:root {
   font-family: Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   background: #c2a2a2;
+
+  --app-height: 800px;
+  --app-width: 800px;
+}
+body {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
   align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#aimbot {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  // how do we want to control this?
+  height: var(--app-height);
+  width: var(--app-width);
 }
 </style>

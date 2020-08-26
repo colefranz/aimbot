@@ -1,5 +1,5 @@
 <template>
-  <div id="start-view">
+  <div class="main-menu">
     <div class="start-view__buttons">
       <button v-on:click.stop="startGame()">Time Trial</button>
       <button v-on:click.stop="displayCustomSettings()">Custom Mode</button>
@@ -12,19 +12,15 @@ import { Vue, Component } from "vue-property-decorator";
 import { actions } from "@stores/main-store";
 
 @Component
-export default class StartView extends Vue {
+export default class MainMenu extends Vue {
   startGame() {
-    this.$store.dispatch(actions.startGame);
-  }
-
-  displayCustomSettings() {
-    console.log('displayCustomSettings');
+    this.$store.dispatch(actions.goToGameView);
   }
 }
 </script>
 
 <style lang="scss">
-.start-view {
+.main-menu {
   display: flex;
   flex-direction: column;
 }

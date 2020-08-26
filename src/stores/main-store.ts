@@ -3,45 +3,70 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-export const actions = {
-    startGame: 'startGame',
-    endGame: 'endGame'
-};
+export enum Views {
+  MainMenu = 'MainMenu',
+  GameView = 'GameView',
+}
 
-export const mutations = {
-    setInGame: 'setInGame'
-};
+export enum actions {
+  goToMainMenu = 'goToMainMenu',
+  goToGameView = 'goToGameView',
+  startGame = 'startGame',
+  targetClicked = 'targetClicked',
+  targetExpired = 'targetExpired',
+}
+
+export enum mutations {
+  setCurrentView = 'setCurrentView',
+  setStartTime = 'setStartTime',
+  incrementScore = 'incrementScore',
+  decrementLives = 'decrementLives',
+}
 
 export const mainStore = new Vuex.Store({
   state: {
-    inGame: false,
-    score: {
-      value: 0,
-    },
-    lives: {
-      value: 3,
-    },
-    targetsMissed: {
-      value: 0,
-    },
-    accuracy: {
-      value: 100,
-    },
-    time: {
-      value: 0,
+    currentView: Views.MainMenu,
+    score: 0,
+    lives: 3,
+    targetsMissed: 0,
+    accuracy: 100,
+    time: 0,
+    startTime: 0,
+    gameConfig: {
+      targetsPerSecond: 2,
+      accelerationEnabled: true,
+      targetWidth: 70,
     },
   },
   actions: {
-    [actions.startGame]({ commit }) {
-      commit(mutations.setInGame, true);
+    [actions.goToGameView]({ commit }) {
+      commit(mutations.setCurrentView, Views.GameView);
     },
-    [actions.endGame]({ commit }) {
-      commit(mutations.setInGame, false);
+    [actions.goToMainMenu]({ commit }) {
+      commit(mutations.setCurrentView, Views.MainMenu);
+    },
+    [actions.startGame]({ commit }) {
+      commit(mutations.setStartTime, new Date().getTime());
+    },
+    [actions.targetClicked]({ commit }) {
+      commit(mutations.incrementScore);
+    },
+    [actions.targetExpired]({ commit }) {
+      commit(mutations.decrementLives);
     },
   },
   mutations: {
-    [mutations.setInGame](state, inGame) {
-      state.inGame = inGame;
+    [mutations.setCurrentView](state, view: Views) {
+      state.currentView = view;
+    },
+    [mutations.setStartTime](state, time: number) {
+      state.startTime = time;
+    },
+    [mutations.incrementScore](state) {
+      state.score++;
+    },
+    [mutations.decrementLives](state) {
+      state.lives--;
     },
   },
 });
