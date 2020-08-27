@@ -7,44 +7,64 @@
         v-on:expired="handleTargetExpired"
         v-on:clicked="handleTargetClicked"
         :targetId="targetId"
+        :gameEnded="gameEnded"
       ></Target>
     </div>
     <div class="game-view__footer">
-      <p>Score: {{ $store.state.score }}</p>
-      <p>Lives: {{ $store.state.lives }}</p>
+      <p>Score: {{ $store.state.gameState.score }}</p>
+      <p>Lives: {{ $store.state.gameState.lives }}</p>
       <button v-on:click.stop="endGame()">Quit</button>
     </div>
+    <PostGameDialog
+      v-if="gameEnded"
+      v-on:restart="restartGame"
+    ></PostGameDialog>
   </div>
 </template>
 
 <script lang="ts">
 import { actions } from "@stores/main-store";
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component, Watch } from "vue-property-decorator";
 import Target from "./target.vue";
+import PostGameDialog from "./post-game-dialog.vue";
 
 @Component({
-  components: { Target },
+  components: { PostGameDialog, Target },
 })
 export default class GameView extends Vue {
   targetIds: string[] = [];
   timeout = null; // what's wrong with types?? No `Timeout`
 
   created() {
-    this.$store.dispatch(actions.startGame);
-    this.spawnTarget();
+    this.startGame();
   }
 
   beforeDestroy() {
-    if (this.timeout) clearTimeout(this.timeout);
+    this.stopProduction();
   }
 
-  spawnTarget() {
+  async startGame() {
+    await this.$store.dispatch(actions.startGame);
+    this.produceTarget();
+  }
+
+  async restartGame() {
+    this.targetIds = [];
+    await this.$store.dispatch(actions.resetGame);
+    await this.startGame();
+  }
+
+  produceTarget() {
     const accelerationEnabled = this.$store.state.gameConfig
       .accelerationEnabled;
-    const timeElapsed = new Date().getTime() - this.$store.state.startTime;
-    const ratioForTime = accelerationEnabled ? 1 : 1; // figure out a good ratio for acceleration
+    const timeElapsed =
+      new Date().getTime() - this.$store.state.gameState.startTime;
+    const extraTargetsPerSecond = accelerationEnabled
+      ? (timeElapsed / 30000) * 0.5
+      : 0;
     const currentTimeBetween =
-      1000 / this.$store.state.gameConfig.targetsPerSecond;
+      1000 /
+      (this.$store.state.gameConfig.targetsPerSecond + extraTargetsPerSecond);
     this.timeout = setTimeout(() => {
       function guid() {
         var s4 = function() {
@@ -56,8 +76,12 @@ export default class GameView extends Vue {
         return s4() + s4();
       }
       this.targetIds.push(guid());
-      this.spawnTarget();
+      this.produceTarget();
     }, currentTimeBetween);
+  }
+
+  stopProduction() {
+    if (this.timeout) clearTimeout(this.timeout);
   }
 
   endGame() {
@@ -65,8 +89,10 @@ export default class GameView extends Vue {
   }
 
   handleTargetClicked(targetId: string) {
-    this.$store.dispatch(actions.targetClicked);
-    this.spliceTarget(targetId);
+    if (!this.gameEnded) {
+      this.$store.dispatch(actions.targetClicked);
+      this.spliceTarget(targetId);
+    }
   }
 
   handleTargetExpired(targetId: string) {
@@ -82,11 +108,23 @@ export default class GameView extends Vue {
       this.targetIds.splice(index, 1);
     }
   }
+
+  get gameEnded() {
+    return this.$store.state.gameState.lives <= 0;
+  }
+
+  @Watch("gameEnded")
+  onLivesChanged(gameEnded: boolean) {
+    if (gameEnded) {
+      this.stopProduction();
+    }
+  }
 }
 </script>
 
 <style lang="scss">
 .game-view {
+  position: relative;
   height: 100%;
   width: 100%;
   display: grid;
@@ -107,6 +145,17 @@ export default class GameView extends Vue {
 .game-view__footer {
   grid-area: footer;
   display: grid;
+  justify-items: center;
+  align-items: center;
   grid-auto-flow: column;
+}
+
+.game-view__post-game-dialog {
+  display: grid;
+  grid-auto-rows: column;
+  justify-items: center;
+  align-items: center;
+  width: 80%;
+  height: 80%;
 }
 </style>

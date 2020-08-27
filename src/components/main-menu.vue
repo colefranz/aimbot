@@ -2,7 +2,6 @@
   <div class="main-menu">
     <div class="start-view__buttons">
       <button v-on:click.stop="startGame()">Time Trial</button>
-      <button v-on:click.stop="displayCustomSettings()">Custom Mode</button>
     </div>
   </div>
 </template>

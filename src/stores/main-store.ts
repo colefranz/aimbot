@@ -3,12 +3,16 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+const DEFAULT_LIVES = 3;
+const DEFAULT_TARGETS_PER_SECOND = 2;
+
 export enum Views {
   MainMenu = 'MainMenu',
   GameView = 'GameView',
 }
 
 export enum actions {
+  resetGame = 'resetGame',
   goToMainMenu = 'goToMainMenu',
   goToGameView = 'goToGameView',
   startGame = 'startGame',
@@ -17,6 +21,7 @@ export enum actions {
 }
 
 export enum mutations {
+  resetGameState = 'resetGameState',
   setCurrentView = 'setCurrentView',
   setStartTime = 'setStartTime',
   incrementScore = 'incrementScore',
@@ -26,19 +31,24 @@ export enum mutations {
 export const mainStore = new Vuex.Store({
   state: {
     currentView: Views.MainMenu,
-    score: 0,
-    lives: 3,
-    targetsMissed: 0,
-    accuracy: 100,
-    time: 0,
-    startTime: 0,
+    gameState: {
+      score: 0,
+      lives: DEFAULT_LIVES,
+      startTime: 0,
+      accuracy: 100,
+      targetsMissed: 0,
+    },
     gameConfig: {
-      targetsPerSecond: 2,
+      targetsPerSecond: DEFAULT_TARGETS_PER_SECOND,
       accelerationEnabled: true,
       targetWidth: 70,
+      lives: DEFAULT_LIVES,
     },
   },
   actions: {
+    [actions.resetGame]({ commit }) {
+      commit(mutations.resetGameState);
+    },
     [actions.goToGameView]({ commit }) {
       commit(mutations.setCurrentView, Views.GameView);
     },
@@ -56,17 +66,23 @@ export const mainStore = new Vuex.Store({
     },
   },
   mutations: {
+    [mutations.resetGameState](state) {
+      state.gameState.score = 0;
+      state.gameState.lives = state.gameConfig.lives;
+      state.gameState.accuracy = 0;
+      state.gameState.targetsMissed = 0;
+    },
     [mutations.setCurrentView](state, view: Views) {
       state.currentView = view;
     },
     [mutations.setStartTime](state, time: number) {
-      state.startTime = time;
+      state.gameState.startTime = time;
     },
     [mutations.incrementScore](state) {
-      state.score++;
+      state.gameState.score++;
     },
     [mutations.decrementLives](state) {
-      state.lives--;
+      state.gameState.lives--;
     },
   },
 });

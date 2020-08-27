@@ -8,6 +8,7 @@
   >
     <svg
       ref="svg"
+      class="target__svg"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       v-on:animationend="finish('expired')"
@@ -15,27 +16,34 @@
       :width="width"
       viewBox="0 0 32 32"
     >
-      <circle class="target__outer-circle" cx="16" cy="16" r="14.5" />
-      <circle class="target__inner-circle" cx="16" cy="16" r="5" />
+      <circle ref="outerCircle" class="target__outer-circle" cx="16" cy="16" />
+      <circle ref="innerCircle" class="target__inner-circle" cx="16" cy="16" />
     </svg>
   </div>
 </template>
 
 <script lang="ts">
 import { actions } from "@stores/main-store";
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 
 @Component
 export default class Target extends Vue {
   @Prop(String) targetId: string;
+  @Prop(Boolean) gameEnded: boolean;
   top: number = 0;
   left: number = 0;
+
+  $refs: {
+    innerCircle;
+    outerCircle;
+    svg;
+  };
 
   mounted() {
     const parentHeight = this.$parent.$el.clientHeight;
     const parentWidth = this.$parent.$el.clientWidth;
-    this.top = Math.random() * (parentHeight - this.width - 80);
-    this.left = Math.random() * (parentWidth - this.width - 80);
+    this.top = Math.random() * (parentHeight - this.width - 80); // fixme 80 magic number
+    this.left = Math.random() * (parentWidth - this.width - 80); // fixme 80 magic number
   }
 
   finish(event: string) {
@@ -51,6 +59,14 @@ export default class Target extends Vue {
       top: `${this.top}px`,
       left: `${this.left}px`,
     };
+  }
+
+  @Watch("gameEnded")
+  onLivesChanged(gameEnded: boolean) {
+    if (gameEnded) {
+      this.$refs.innerCircle.style.animationPlayState = "paused";
+      this.$refs.outerCircle.style.animationPlayState = "paused";
+    }
   }
 }
 </script>
@@ -80,8 +96,12 @@ $target-green: green;
 
 .target {
   position: absolute;
-  z-index: 17000;
   pointer-events: none;
+  overflow: visible;
+}
+
+.target__svg {
+  overflow: visible;
 }
 
 .target__inner-circle {
