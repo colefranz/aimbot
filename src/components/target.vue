@@ -12,7 +12,7 @@
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       v-on:animationend="finish('expired')"
-      v-on:click.stop="finish('clicked')"
+      v-on:click.stop.prevent="finish('clicked')"
       :width="width"
       viewBox="0 0 32 32"
     >
@@ -72,7 +72,7 @@ export default class Target extends Vue {
 </script>
 
 <style lang="scss">
-$target-green: green;
+$target-green: #449955;
 
 @keyframes inner-explosion {
   0%,

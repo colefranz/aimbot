@@ -1,5 +1,12 @@
 <template>
   <div class="post-game-dialog">
+    <div class="post-game-dialog__game-over-banner"></div>
+    <div class="post-game-dialog__stats">
+      <p>Score: {{ $store.state.gameState.score }}</p>
+      <p>Lives: {{ $store.state.gameState.lives }}</p>
+      <p>Accuracy: {{ $store.getters.accuracy }}</p>
+      <p>Time: {{ $store.getters.gameTime }}</p>
+    </div>
     <button v-on:click.stop="restartGame()">Play again?</button>
     <button v-on:click.stop="backToMainMenu()">Back to main menu</button>
   </div>
@@ -35,5 +42,11 @@ export default class PostGameDialog extends Vue {
   width: 80%;
   height: 80%;
   background: aquamarine;
+}
+.post-game-dialog__stats {
+  display: grid;
+  grid-auto-rows: column;
+  justify-items: center;
+  align-items: center;
 }
 </style>

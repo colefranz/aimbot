@@ -28,8 +28,8 @@ export default class Aimbot extends Vue {
   -moz-osx-font-smoothing: grayscale;
   background: #c2a2a2;
 
-  --app-height: 800px;
-  --app-width: 800px;
+  --app-height: 600px;
+  --app-width: 600px;
 }
 body {
   position: absolute;

@@ -1,6 +1,6 @@
 <template>
   <div class="game-view">
-    <div class="game-view__game-area">
+    <div class="game-view__game-area" v-on:click.stop.prevent="targetMissed()">
       <Target
         v-for="targetId in targetIds"
         :key="targetId"
@@ -13,12 +13,11 @@
     <div class="game-view__footer">
       <p>Score: {{ $store.state.gameState.score }}</p>
       <p>Lives: {{ $store.state.gameState.lives }}</p>
-      <button v-on:click.stop="endGame()">Quit</button>
+      <p>Accuracy: {{ $store.getters.accuracy }}</p>
+      <p>Time: {{ $store.getters.gameTime }}</p>
+      <button v-on:click.stop.prevent="endGame()">Quit</button>
     </div>
-    <PostGameDialog
-      v-if="gameEnded"
-      v-on:restart="restartGame"
-    ></PostGameDialog>
+    <PostGameDialog v-if="gameEnded" v-on:restart="startGame"></PostGameDialog>
   </div>
 </template>
 
@@ -33,25 +32,37 @@ import PostGameDialog from "./post-game-dialog.vue";
 })
 export default class GameView extends Vue {
   targetIds: string[] = [];
-  timeout = null; // what's wrong with types?? No `Timeout`
+  // what's wrong with types?? No `Timeout`
+  targetProductionTimeout = null;
+  clockTickTimeout = null;
 
   created() {
     this.startGame();
   }
 
   beforeDestroy() {
-    this.stopProduction();
+    this.stopIntervals();
   }
 
   async startGame() {
-    await this.$store.dispatch(actions.startGame);
+    this.targetIds = [];
+    await this.startClock();
+    await this.$store.dispatch(actions.resetGame);
     this.produceTarget();
   }
 
-  async restartGame() {
-    this.targetIds = [];
-    await this.$store.dispatch(actions.resetGame);
-    await this.startGame();
+  async startClock() {
+    await this.$store.dispatch(actions.startGameClock);
+    this.tickClock();
+  }
+
+  tickClock() {
+    // should really only need to check every second but that could lead
+    // to ugly behaviour as we miss by ms each time
+    this.clockTickTimeout = setTimeout(() => {
+      this.$store.dispatch(actions.updateGameTime);
+      this.tickClock();
+    }, 64);
   }
 
   produceTarget() {
@@ -65,7 +76,7 @@ export default class GameView extends Vue {
     const currentTimeBetween =
       1000 /
       (this.$store.state.gameConfig.targetsPerSecond + extraTargetsPerSecond);
-    this.timeout = setTimeout(() => {
+    this.targetProductionTimeout = setTimeout(() => {
       function guid() {
         var s4 = function() {
           return Math.floor((1 + Math.random()) * 0x10000)
@@ -80,8 +91,13 @@ export default class GameView extends Vue {
     }, currentTimeBetween);
   }
 
-  stopProduction() {
-    if (this.timeout) clearTimeout(this.timeout);
+  stopIntervals() {
+    if (this.targetProductionTimeout) {
+      clearTimeout(this.targetProductionTimeout);
+    }
+    if (this.clockTickTimeout) {
+      clearTimeout(this.clockTickTimeout);
+    }
   }
 
   endGame() {
@@ -100,6 +116,12 @@ export default class GameView extends Vue {
     this.spliceTarget(targetId);
   }
 
+  targetMissed() {
+    if (!this.gameEnded) {
+      this.$store.dispatch(actions.clickMissed);
+    }
+  }
+
   spliceTarget(targetId: string) {
     const index = this.targetIds.indexOf(targetId);
 
@@ -116,7 +138,7 @@ export default class GameView extends Vue {
   @Watch("gameEnded")
   onLivesChanged(gameEnded: boolean) {
     if (gameEnded) {
-      this.stopProduction();
+      this.stopIntervals();
     }
   }
 }
