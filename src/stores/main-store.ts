@@ -25,6 +25,7 @@ export enum actions {
   targetClicked = 'targetClicked',
   targetExpired = 'targetExpired',
   clickMissed = 'clickMissed',
+  endGame = 'endGame',
 }
 
 export enum mutations {
@@ -34,6 +35,7 @@ export enum mutations {
   setCurrentTime = 'setCurrentTime',
   incrementScore = 'incrementScore',
   decrementLives = 'decrementLives',
+  setLives = 'setLives',
   incrementClicksMissed = 'incrementClicksMissed',
 }
 
@@ -71,7 +73,6 @@ export const mainStore = new Vuex.Store({
 
       const dateWithMsElapsed = new Date(0);
       dateWithMsElapsed.setMilliseconds(msElapsed);
-      console.log(msElapsed);
       return dateWithMsElapsed.toISOString().substr(14, 5);
     },
   },
@@ -101,6 +102,9 @@ export const mainStore = new Vuex.Store({
     [actions.clickMissed]({ commit }) {
       commit(mutations.incrementClicksMissed);
     },
+    [actions.endGame]({ commit }) {
+      commit(mutations.setLives, 0);
+    },
   },
   mutations: {
     [mutations.resetGameState](state) {
@@ -122,6 +126,9 @@ export const mainStore = new Vuex.Store({
     },
     [mutations.decrementLives](state) {
       state.gameState.lives--;
+    },
+    [mutations.setLives](state, lives: number) {
+      state.gameState.lives = lives;
     },
     [mutations.incrementClicksMissed](state) {
       state.gameState.clicksMissed++;

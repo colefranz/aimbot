@@ -37,6 +37,7 @@ export default class GameView extends Vue {
   clockTickTimeout = null;
 
   created() {
+    document.addEventListener("keydown", this.onKeyDown);
     this.startGame();
   }
 
@@ -101,6 +102,10 @@ export default class GameView extends Vue {
   }
 
   endGame() {
+    this.$store.dispatch(actions.endGame);
+  }
+
+  goToMainMenu() {
     this.$store.dispatch(actions.goToMainMenu);
   }
 
@@ -131,12 +136,18 @@ export default class GameView extends Vue {
     }
   }
 
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      this.endGame();
+    }
+  }
+
   get gameEnded() {
     return this.$store.state.gameState.lives <= 0;
   }
 
   @Watch("gameEnded")
-  onLivesChanged(gameEnded: boolean) {
+  onGameEndedChanged(gameEnded: boolean) {
     if (gameEnded) {
       this.stopIntervals();
     }
