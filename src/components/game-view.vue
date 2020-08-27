@@ -67,16 +67,10 @@ export default class GameView extends Vue {
   }
 
   produceTarget() {
-    const accelerationEnabled = this.$store.state.gameConfig
-      .accelerationEnabled;
-    const timeElapsed =
-      new Date().getTime() - this.$store.state.gameState.startTime;
-    const extraTargetsPerSecond = accelerationEnabled
-      ? (timeElapsed / 30000) * 0.5
-      : 0;
-    const currentTimeBetween =
-      1000 /
-      (this.$store.state.gameConfig.targetsPerSecond + extraTargetsPerSecond);
+    const accelerationEnabled = this.$store.state.gameConfig.accelerationEnabled;
+    const timeElapsed = new Date().getTime() - this.$store.state.gameState.startTime;
+    const extraTargetsPerSecond = accelerationEnabled ? (timeElapsed / 30000) * 0.5 : 0;
+    const currentTimeBetween = 1000 / (this.$store.state.gameConfig.targetsPerSecond + extraTargetsPerSecond);
     this.targetProductionTimeout = setTimeout(() => {
       function guid() {
         var s4 = function() {
