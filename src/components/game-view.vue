@@ -17,7 +17,9 @@
       <p>Time: {{ $store.getters.gameTime }}</p>
       <button v-on:click.stop.prevent="endGame()">Quit</button>
     </div>
-    <PostGameDialog v-if="gameEnded" v-on:restart="startGame"></PostGameDialog>
+    <SlottedDialog v-if="gameEnded">
+      <PostGameDialog v-on:restart="startGame"></PostGameDialog>
+    </SlottedDialog>
   </div>
 </template>
 
@@ -26,9 +28,10 @@ import { actions } from "@stores/main-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
 import Target from "./target.vue";
 import PostGameDialog from "./post-game-dialog.vue";
+import SlottedDialog from "./slotted-dialog.vue";
 
 @Component({
-  components: { PostGameDialog, Target },
+  components: { PostGameDialog, SlottedDialog, Target },
 })
 export default class GameView extends Vue {
   targetIds: string[] = [];

@@ -30,19 +30,6 @@ export default class PostGameDialog extends Vue {
 </script>
 
 <style lang="scss">
-.post-game-dialog {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: grid;
-  grid-auto-rows: column;
-  justify-items: center;
-  align-items: center;
-  width: 80%;
-  height: 80%;
-  background: aquamarine;
-}
 .post-game-dialog__stats {
   display: grid;
   grid-auto-rows: column;

@@ -26,6 +26,9 @@ export enum actions {
   targetExpired = 'targetExpired',
   clickMissed = 'clickMissed',
   endGame = 'endGame',
+  updateTargetsPerSecond = 'updateTargetsPerSecond',
+  updateTargetWidth = 'updateTargetWidth',
+  updateAccelerationEnabled = 'updateAccelerationEnabled',
 }
 
 export enum mutations {
@@ -37,6 +40,9 @@ export enum mutations {
   decrementLives = 'decrementLives',
   setLives = 'setLives',
   incrementClicksMissed = 'incrementClicksMissed',
+  setTargetsPerSecond = 'setTargetsPerSecond',
+  setTargetWidth = 'setTargetWidth',
+  setAccelerationEnabled = 'setAccelerationEnabled',
 }
 
 export const mainStore = new Vuex.Store({
@@ -105,6 +111,15 @@ export const mainStore = new Vuex.Store({
     [actions.endGame]({ commit }) {
       commit(mutations.setLives, 0);
     },
+    [actions.updateTargetsPerSecond]({ commit }, value) {
+      commit(mutations.setTargetsPerSecond, value);
+    },
+    [actions.updateTargetWidth]({ commit }, value) {
+      commit(mutations.setTargetWidth, value);
+    },
+    [actions.updateAccelerationEnabled]({ commit }, value) {
+      commit(mutations.setAccelerationEnabled, value);
+    },
   },
   mutations: {
     [mutations.resetGameState](state) {
@@ -132,6 +147,15 @@ export const mainStore = new Vuex.Store({
     },
     [mutations.incrementClicksMissed](state) {
       state.gameState.clicksMissed++;
+    },
+    [mutations.setTargetsPerSecond](state, targetsPerSecond) {
+      state.gameConfig.targetsPerSecond = targetsPerSecond;
+    },
+    [mutations.setTargetWidth](state, targetWidth) {
+      state.gameConfig.targetWidth = targetWidth;
+    },
+    [mutations.setAccelerationEnabled](state, accelerationEnabled) {
+      state.gameConfig.accelerationEnabled = accelerationEnabled;
     },
   },
 });
