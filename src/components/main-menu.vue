@@ -41,12 +41,9 @@ export default class MainMenu extends Vue {
   position: relative;
   height: 100%;
   width: 100%;
+  display: grid;
   justify-items: center;
   align-items: center;
   grid-auto-flow: column;
-}
-.start-view__buttons {
-  display: flex;
-  flex-direction: column;
 }
 </style>

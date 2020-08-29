@@ -6,6 +6,22 @@ Vue.use(Vuex);
 const DEFAULT_LIVES = 3;
 const DEFAULT_TARGETS_PER_SECOND = 2;
 
+type GameConfig = {
+  targetsPerSecond: number;
+  accelerationEnabled: boolean;
+  targetWidth: number;
+  lives: number;
+};
+
+function getDefaultGameConfig(): GameConfig {
+  return {
+    targetsPerSecond: DEFAULT_TARGETS_PER_SECOND,
+    accelerationEnabled: true,
+    targetWidth: 70,
+    lives: DEFAULT_LIVES,
+  };
+}
+
 export enum Views {
   MainMenu = 'MainMenu',
   GameView = 'GameView',
@@ -26,6 +42,7 @@ export enum actions {
   targetExpired = 'targetExpired',
   clickMissed = 'clickMissed',
   endGame = 'endGame',
+  resetGameConfig = 'resetGameConfig',
   updateTargetsPerSecond = 'updateTargetsPerSecond',
   updateTargetWidth = 'updateTargetWidth',
   updateAccelerationEnabled = 'updateAccelerationEnabled',
@@ -43,6 +60,7 @@ export enum mutations {
   setTargetsPerSecond = 'setTargetsPerSecond',
   setTargetWidth = 'setTargetWidth',
   setAccelerationEnabled = 'setAccelerationEnabled',
+  setGameConfig = 'setGameConfig',
 }
 
 export const mainStore = new Vuex.Store({
@@ -55,12 +73,7 @@ export const mainStore = new Vuex.Store({
       currentTime: 0,
       clicksMissed: 0,
     },
-    gameConfig: {
-      targetsPerSecond: DEFAULT_TARGETS_PER_SECOND,
-      accelerationEnabled: true,
-      targetWidth: 70,
-      lives: DEFAULT_LIVES,
-    },
+    gameConfig: getDefaultGameConfig(),
   },
   getters: {
     [getters.accuracy](state) {
@@ -111,6 +124,9 @@ export const mainStore = new Vuex.Store({
     [actions.endGame]({ commit }) {
       commit(mutations.setLives, 0);
     },
+    [actions.resetGameConfig]({ commit }) {
+      commit(mutations.setGameConfig, getDefaultGameConfig());
+    },
     [actions.updateTargetsPerSecond]({ commit }, value) {
       commit(mutations.setTargetsPerSecond, value);
     },
@@ -156,6 +172,9 @@ export const mainStore = new Vuex.Store({
     },
     [mutations.setAccelerationEnabled](state, accelerationEnabled) {
       state.gameConfig.accelerationEnabled = accelerationEnabled;
+    },
+    [mutations.setGameConfig](state, gameConfig) {
+      Vue.set(state, 'gameConfig', gameConfig);
     },
   },
 });

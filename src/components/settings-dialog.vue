@@ -12,6 +12,7 @@
       ></SettingsInput>
     </div>
     <div class="settings-dialog__buttons">
+      <button v-on:click.stop="resetConfig()">Reset Config</button>
       <button v-on:click.stop="$emit('close')">Back to main menu</button>
     </div>
   </div>
@@ -26,6 +27,10 @@ import SettingsInput from "@components/settings-input.vue";
   components: { SettingsInput },
 })
 export default class SettingsDialog extends Vue {
+  resetConfig() {
+    this.$store.dispatch(actions.resetGameConfig);
+  }
+
   get settings() {
     return [
       {
