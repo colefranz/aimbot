@@ -10,6 +10,7 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
+  stats: { children: false },
   module: {
     rules: [
       {
@@ -35,17 +36,14 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
+          "sass-loader",
           {
-            loader: "sass-loader",
+            loader: "sass-resources-loader",
+            options: {
+              resources: "./styles/colors.scss",
+            },
           },
         ],
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: "file-loader",
-        options: {
-          name: "[name].[ext]?[hash]",
-        },
       },
     ],
   },

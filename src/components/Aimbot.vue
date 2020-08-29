@@ -23,14 +23,15 @@ export default class Aimbot extends Vue {
 
 <style lang="scss">
 :root {
-  font-family: Arial, sans-serif;
+  font-family: Roboto, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #c2a2a2;
+  background: $background-color;
 
   --app-height: 600px;
   --app-width: 600px;
 }
+
 body {
   position: absolute;
   top: 0;

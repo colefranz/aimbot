@@ -1,23 +1,26 @@
 <template>
   <div class="main-menu">
+    <AbLogo></AbLogo>
     <div class="start-view__buttons">
-      <button v-on:click.stop="goToGameView()">Time Trial</button>
-      <button v-on:click.stop="openSettings()">Customize Settings</button>
+      <AbButton @click="goToGameView()" :primary="true">Time Trial</AbButton>
+      <AbButton @click="openSettings()">Customize Settings</AbButton>
     </div>
-    <SlottedDialog v-if="settingsVisible">
+    <AbDialog v-if="settingsVisible">
       <SettingsDialog v-on:close="closeSettings()"></SettingsDialog>
-    </SlottedDialog>
+    </AbDialog>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import { actions } from "@stores/main-store";
-import SlottedDialog from "@components/slotted-dialog.vue";
+import AbDialog from "@components/dialog.vue";
 import SettingsDialog from "@components/settings-dialog.vue";
+import AbButton from "@components/button.vue";
+import AbLogo from "@components/logo.vue";
 
 @Component({
-  components: { SettingsDialog, SlottedDialog },
+  components: { AbButton, AbLogo, SettingsDialog, AbDialog },
 })
 export default class MainMenu extends Vue {
   settingsVisible = false;
@@ -41,9 +44,9 @@ export default class MainMenu extends Vue {
   position: relative;
   height: 100%;
   width: 100%;
-  display: grid;
-  justify-items: center;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  grid-auto-flow: column;
+  flex-direction: column;
 }
 </style>

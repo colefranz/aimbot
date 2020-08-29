@@ -8,10 +8,11 @@
 import { Vue, Component } from "vue-property-decorator";
 
 @Component
-export default class SlottedDialog extends Vue {}
+export default class AbDialog extends Vue {}
 </script>
 
 <style lang="scss">
+$dialog-green: $green;
 .slotted-dialog {
   position: absolute;
   top: 50%;
@@ -23,6 +24,7 @@ export default class SlottedDialog extends Vue {}
   align-items: center;
   width: 80%;
   height: 80%;
-  background: aquamarine;
+  background: $background-color;
+  box-shadow: 0px 5px 20px $background-accent;
 }
 </style>

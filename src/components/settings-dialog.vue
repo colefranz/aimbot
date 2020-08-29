@@ -12,8 +12,8 @@
       ></SettingsInput>
     </div>
     <div class="settings-dialog__buttons">
-      <button v-on:click.stop="resetConfig()">Reset Config</button>
-      <button v-on:click.stop="$emit('close')">Back to main menu</button>
+      <AbButton @click="resetConfig()">Reset Config</AbButton>
+      <AbButton @click="$emit('close')">Back to main menu</AbButton>
     </div>
   </div>
 </template>
@@ -22,9 +22,10 @@
 import { actions } from "@stores/main-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
 import SettingsInput from "@components/settings-input.vue";
+import AbButton from "@components/button.vue";
 
 @Component({
-  components: { SettingsInput },
+  components: { AbButton, SettingsInput },
 })
 export default class SettingsDialog extends Vue {
   resetConfig() {

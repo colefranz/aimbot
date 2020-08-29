@@ -15,11 +15,11 @@
       <p>Lives: {{ $store.state.gameState.lives }}</p>
       <p>Accuracy: {{ $store.getters.accuracy }}</p>
       <p>Time: {{ $store.getters.gameTime }}</p>
-      <button v-on:click.stop.prevent="endGame()">Quit</button>
+      <AbButton @click="endGame()">Quit</AbButton>
     </div>
-    <SlottedDialog v-if="gameEnded">
+    <AbDialog v-if="gameEnded">
       <PostGameDialog v-on:restart="startGame"></PostGameDialog>
-    </SlottedDialog>
+    </AbDialog>
   </div>
 </template>
 
@@ -28,10 +28,11 @@ import { actions } from "@stores/main-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
 import Target from "./target.vue";
 import PostGameDialog from "./post-game-dialog.vue";
-import SlottedDialog from "./slotted-dialog.vue";
+import AbDialog from "./dialog.vue";
+import AbButton from "@components/button.vue";
 
 @Component({
-  components: { PostGameDialog, SlottedDialog, Target },
+  components: { AbButton, PostGameDialog, AbDialog, Target },
 })
 export default class GameView extends Vue {
   targetIds: string[] = [];
@@ -168,8 +169,9 @@ export default class GameView extends Vue {
   position: relative;
   height: 100%;
   width: 100%;
-  background: #a2a2c3;
+  background: $game-background-color;
   grid-area: game-area;
+  outline: 3px solid $background-accent;
 }
 
 .game-view__footer {

@@ -72,7 +72,7 @@ export default class Target extends Vue {
 </script>
 
 <style lang="scss">
-$target-green: #449955;
+$target-green: $green;
 
 @keyframes inner-explosion {
   0%,
