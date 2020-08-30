@@ -170,7 +170,9 @@ export default class GameView extends Vue {
   width: 100%;
   background: $game-background-color;
   grid-area: game-area;
-  outline: 3px solid $background-accent;
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba($light, 0.3), transparent 1px),
+    linear-gradient(to bottom, rgba($light, 0.3) 1px, transparent 1px);
 }
 
 .game-view__footer {
@@ -179,14 +181,5 @@ export default class GameView extends Vue {
   justify-items: center;
   align-items: center;
   grid-auto-flow: column;
-}
-
-.game-view__post-game-dialog {
-  display: grid;
-  grid-auto-rows: column;
-  justify-items: center;
-  align-items: center;
-  width: 80%;
-  height: 80%;
 }
 </style>
