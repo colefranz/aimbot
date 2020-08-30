@@ -25,5 +25,8 @@ $dialog-green: $peach;
   height: 80%;
   background: $game-background-color;
   box-shadow: 0px 5px 20px $background-accent;
+  color: #fff;
+  border: 1px solid $light;
+  border-radius: 10px;
 }
 </style>

@@ -32,11 +32,6 @@ export default class Aimbot extends Vue {
   overflow: hidden;
 }
 
-:root * {
-  font-family: Calibri, Roboto, sans-serif !important;
-  font-size: 22px;
-}
-
 body {
   position: absolute;
   top: 0;
@@ -50,6 +45,8 @@ body {
 
 * {
   box-sizing: border-box;
+  font-size: 22px;
+  font-family: Calibri, Roboto, sans-serif !important;
 }
 
 #aimbot {

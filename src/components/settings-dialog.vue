@@ -12,9 +12,11 @@
       ></SettingsInput>
     </div>
     <AbButtonGroup>
-      <AbButton @click="resetConfig()">Reset Config</AbButton>
+      <AbButton @click="resetConfig()" title="Reset Config"
+        ><ResetSvg />Reset Config</AbButton
+      >
       <AbButton @click="$emit('close')" :primary="true"
-        >Back to main menu</AbButton
+        ><HomeSvg />Main Menu</AbButton
       >
     </AbButtonGroup>
   </div>
@@ -26,9 +28,11 @@ import { gameConfigKeys } from "@stores/game-config-store";
 import SettingsInput from "@components/settings-input.vue";
 import AbButton from "@components/button.vue";
 import AbButtonGroup from "@components/button-group.vue";
+import HomeSvg from "@svg/icon-home.svg";
+import ResetSvg from "@svg/icon-reset.svg";
 
 @Component({
-  components: { AbButton, AbButtonGroup, SettingsInput },
+  components: { AbButton, AbButtonGroup, HomeSvg, ResetSvg, SettingsInput },
 })
 export default class SettingsDialog extends Vue {
   resetConfig() {
@@ -41,7 +45,7 @@ export default class SettingsDialog extends Vue {
         attribute: "targetsPerSecond",
         storeAction: gameConfigKeys.actions.updateTargetsPerSecond,
         inputType: "number",
-        name: "Targets Per Second",
+        name: "Targets/Second",
       },
       {
         attribute: "targetWidth",
@@ -63,7 +67,6 @@ export default class SettingsDialog extends Vue {
 <style lang="scss">
 .settings-dialog {
   display: grid;
-  color: #fff;
 }
 
 .settings-dialog .button-group {

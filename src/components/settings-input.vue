@@ -47,4 +47,8 @@ export default class SettingsInput extends Vue {
   width: 70px;
   justify-self: end;
 }
+
+.settings-input input[type="checkbox"] {
+  height: 24px;
+}
 </style>

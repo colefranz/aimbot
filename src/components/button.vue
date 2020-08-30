@@ -37,6 +37,7 @@ $primary-button-color: $peach;
   margin: 8px;
   box-sizing: content-box;
   padding: 10px;
+  border-radius: 5px;
 }
 
 .ab-button--primary {

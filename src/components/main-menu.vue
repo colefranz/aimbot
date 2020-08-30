@@ -2,12 +2,12 @@
   <div class="main-menu">
     <AbLogo></AbLogo>
     <AbButtonGroup>
-      <AbButton @click="goToGameView()" :primary="true"
-        ><TimerSvg />Time Trial</AbButton
-      >
       <AbButton @click="openSettings()" title="Customize Settings"
         ><OptionsSvg
       /></AbButton>
+      <AbButton @click="goToGameView()" :primary="true"
+        ><TimerSvg />Time Trial</AbButton
+      >
     </AbButtonGroup>
     <AbDialog v-if="settingsVisible">
       <SettingsDialog v-on:close="closeSettings()"></SettingsDialog>
