@@ -12,19 +12,16 @@
       ></SettingsInput>
     </div>
     <AbButtonGroup>
-      <AbButton @click="resetConfig()" title="Reset Config"
-        ><ResetSvg />Reset Config</AbButton
-      >
-      <AbButton @click="$emit('close')" :primary="true"
-        ><HomeSvg />Main Menu</AbButton
-      >
+      <AbButton @click="saveAsDefaults()" title="Save as Defaults">Save as Defaults</AbButton>
+      <AbButton @click="resetConfig()" title="Reset Config"><ResetSvg />Reset Config</AbButton>
+      <AbButton @click="$emit('close')" :primary="true"><HomeSvg />Main Menu</AbButton>
     </AbButtonGroup>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Watch } from "vue-property-decorator";
-import { gameConfigKeys } from "@stores/game-config-store";
+import { gameConfigKeys, GAME_CONFIG_KEY } from "@stores/game-config-store";
 import SettingsInput from "@components/settings-input.vue";
 import AbButton from "@components/button.vue";
 import AbButtonGroup from "@components/button-group.vue";
@@ -37,6 +34,10 @@ import ResetSvg from "@svg/icon-reset.svg";
 export default class SettingsDialog extends Vue {
   resetConfig() {
     this.$store.dispatch(gameConfigKeys.actions.resetGameConfig);
+  }
+
+  saveAsDefaults() {
+    window.localStorage.setItem(GAME_CONFIG_KEY, JSON.stringify(this.$store.state.gameConfig));
   }
 
   get settings() {

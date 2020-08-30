@@ -1,9 +1,5 @@
 <template>
-  <button
-    v-on:click.stop.prevent="$emit('click')"
-    class="ab-button"
-    :class="{ 'ab-button--primary': primary }"
-  >
+  <button v-on:click.stop.prevent="$emit('click')" class="ab-button" :class="{ 'ab-button--primary': primary }">
     <slot></slot>
   </button>
 </template>
@@ -30,12 +26,10 @@ $primary-button-color: $peach;
   grid-auto-flow: column;
   justify-items: center;
   align-items: center;
-  height: 36px;
   color: $text-color;
   background: $button-color;
   box-shadow: 0px 2px 5px $border-color;
   margin: 8px;
-  box-sizing: content-box;
   padding: 10px;
   border-radius: 5px;
 }

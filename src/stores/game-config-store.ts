@@ -2,12 +2,24 @@ import Vue from 'vue';
 import { namespaceify } from '@stores/namespaceify';
 
 const DEFAULT_TARGETS_PER_SECOND = 2;
+export const GAME_CONFIG_KEY = 'aimbot-game-config';
 
 type GameConfig = {
   targetsPerSecond: number;
   accelerationEnabled: boolean;
   targetWidth: number;
 };
+
+function getSavedGameConfig(): GameConfig {
+  return Object.assign(
+    {
+      targetsPerSecond: DEFAULT_TARGETS_PER_SECOND,
+      accelerationEnabled: true,
+      targetWidth: 70,
+    },
+    JSON.parse(window.localStorage.getItem(GAME_CONFIG_KEY))
+  );
+}
 
 function getDefaultGameConfig(): GameConfig {
   return {
@@ -43,7 +55,7 @@ export const gameConfigKeys = namespaceify(namespace, keys);
 
 export const gameConfig = {
   namespaced: true,
-  state: getDefaultGameConfig(),
+  state: getSavedGameConfig(),
   actions: {
     [actions.resetGameConfig]({ commit }) {
       commit(mutations.setGameConfig, getDefaultGameConfig());
