@@ -15,7 +15,6 @@
       <p>Lives: {{ $store.state.gameState.lives }}</p>
       <p>Accuracy: {{ $store.getters.accuracy }}</p>
       <p>Time: {{ $store.getters.gameTime }}</p>
-      <AbButton @click="endGame()">Quit</AbButton>
     </div>
     <AbDialog v-if="gameEnded">
       <PostGameDialog v-on:restart="startGame"></PostGameDialog>

@@ -72,7 +72,8 @@ export default class Target extends Vue {
 </script>
 
 <style lang="scss">
-$target-green: $green;
+$target-outside: $peach;
+$target-inside: $light;
 
 @keyframes inner-explosion {
   0%,
@@ -106,15 +107,17 @@ $target-green: $green;
 
 .target__inner-circle {
   pointer-events: initial;
-  animation: inner-explosion 4s linear;
-  fill: darken($target-green, 30%);
-  stroke: darken($target-green, 30%);
+  animation: inner-explosion 3s linear;
+  fill: $target-inside;
+  stroke: $target-inside;
+  stroke-width: 0px;
 }
 
 .target__outer-circle {
   pointer-events: initial;
-  animation: outer-explosion 4s linear;
-  fill: $target-green;
-  stroke: darken($target-green, 30%);
+  animation: outer-explosion 3s linear;
+  fill: $target-outside;
+  stroke: $target-inside;
+  stroke-width: 0px;
 }
 </style>

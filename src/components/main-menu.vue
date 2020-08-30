@@ -1,10 +1,10 @@
 <template>
   <div class="main-menu">
     <AbLogo></AbLogo>
-    <div class="start-view__buttons">
-      <AbButton @click="goToGameView()" :primary="true">Time Trial</AbButton>
+    <AbButtonGroup>
       <AbButton @click="openSettings()">Customize Settings</AbButton>
-    </div>
+      <AbButton @click="goToGameView()" :primary="true">Time Trial</AbButton>
+    </AbButtonGroup>
     <AbDialog v-if="settingsVisible">
       <SettingsDialog v-on:close="closeSettings()"></SettingsDialog>
     </AbDialog>
@@ -17,10 +17,11 @@ import { actions } from "@stores/main-store";
 import AbDialog from "@components/dialog.vue";
 import SettingsDialog from "@components/settings-dialog.vue";
 import AbButton from "@components/button.vue";
+import AbButtonGroup from "@components/button-group.vue";
 import AbLogo from "@components/logo.vue";
 
 @Component({
-  components: { AbButton, AbLogo, SettingsDialog, AbDialog },
+  components: { AbButton, AbButtonGroup, AbLogo, SettingsDialog, AbDialog },
 })
 export default class MainMenu extends Vue {
   settingsVisible = false;

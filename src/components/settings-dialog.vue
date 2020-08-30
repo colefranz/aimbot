@@ -11,10 +11,10 @@
         :name="setting.name"
       ></SettingsInput>
     </div>
-    <div class="settings-dialog__buttons">
+    <AbButtonGroup>
       <AbButton @click="resetConfig()">Reset Config</AbButton>
-      <AbButton @click="$emit('close')">Back to main menu</AbButton>
-    </div>
+      <AbButton @click="$emit('close')" :primary="true">Back to main menu</AbButton>
+    </AbButtonGroup>
   </div>
 </template>
 
@@ -23,9 +23,10 @@ import { actions } from "@stores/main-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
 import SettingsInput from "@components/settings-input.vue";
 import AbButton from "@components/button.vue";
+import AbButtonGroup from "@components/button-group.vue";
 
 @Component({
-  components: { AbButton, SettingsInput },
+  components: { AbButton, AbButtonGroup, SettingsInput },
 })
 export default class SettingsDialog extends Vue {
   resetConfig() {

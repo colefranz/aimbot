@@ -29,35 +29,35 @@ export default class AbButton extends Vue {
 .ab-logo rect {
   transform-box: fill-box;
   transform-origin: center;
-  stroke: $gold;
-  fill: $green;
+  stroke: $peach;
+  fill: $peach;
   fill-opacity: 1;
   opacity: 1;
   stroke-width: 0.5;
   stroke-opacity: 1;
 
   &:nth-child(1) {
-    fill: $light-blue;
+    fill: $light;
   }
 
   &:nth-child(2) {
-    fill: $blue;
+    fill: $accent;
   }
 
   &:nth-child(3) {
-    fill: $dark-blue;
+    fill: $navy;
   }
 
   &:nth-child(4) {
-    fill: $green;
+    fill: $peach;
   }
 
   &:nth-child(5) {
-    fill: $light-blue;
+    fill: $light;
   }
 
   &:nth-child(6) {
-    fill: $dark-blue;
+    fill: $navy;
   }
 }
 </style>

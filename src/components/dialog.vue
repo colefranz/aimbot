@@ -12,7 +12,7 @@ export default class AbDialog extends Vue {}
 </script>
 
 <style lang="scss">
-$dialog-green: $green;
+$dialog-green: $peach;
 .slotted-dialog {
   position: absolute;
   top: 50%;

@@ -16,17 +16,22 @@ export default class AbButton extends Vue {
 </script>
 
 <style lang="scss">
-$primary-button-color: $gold;
+$button-color: $background-color;
+$primary-button-color: $peach;
 
 .ab-button {
   cursor: pointer;
   outline: none;
   border: none;
+  display: grid;
+  justify-items: center;
+  align-items: center;
   height: 36px;
-  line-height: 16px;
-  padding: 10px;
   font-size: 16px;
   color: $text-color;
+  background: $button-color;
+  box-shadow: 0px 2px 5px $border-color;
+  margin: 8px;
 }
 
 .ab-button--primary {

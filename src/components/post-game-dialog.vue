@@ -7,8 +7,10 @@
       <p>Accuracy: {{ $store.getters.accuracy }}</p>
       <p>Time: {{ $store.getters.gameTime }}</p>
     </div>
-    <AbButton @click="restartGame()" :primary="true">Play again?</AbButton>
-    <AbButton @click="backToMainMenu()">Back to main menu</AbButton>
+    <AbButtonGroup>
+      <AbButton @click="backToMainMenu()">Back to main menu</AbButton>
+      <AbButton @click="restartGame()" :primary="true">Play again?</AbButton>
+    </AbButtonGroup>
   </div>
 </template>
 
@@ -17,9 +19,10 @@ import { actions } from "@stores/main-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
 import Target from "@components/target.vue";
 import AbButton from "@components/button.vue";
+import AbButtonGroup from "@components/button-group.vue";
 
 @Component({
-  components: { AbButton },
+  components: { AbButton, AbButtonGroup },
 })
 export default class PostGameDialog extends Vue {
   restartGame() {
