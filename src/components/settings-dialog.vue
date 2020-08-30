@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { actions } from "@stores/main-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
+import { gameConfigKeys } from "@stores/game-config-store";
 import SettingsInput from "@components/settings-input.vue";
 import AbButton from "@components/button.vue";
 import AbButtonGroup from "@components/button-group.vue";
@@ -30,26 +30,26 @@ import AbButtonGroup from "@components/button-group.vue";
 })
 export default class SettingsDialog extends Vue {
   resetConfig() {
-    this.$store.dispatch(actions.resetGameConfig);
+    this.$store.dispatch(gameConfigKeys.actions.resetGameConfig);
   }
 
   get settings() {
     return [
       {
         attribute: "targetsPerSecond",
-        storeAction: actions.updateTargetsPerSecond,
+        storeAction: gameConfigKeys.actions.updateTargetsPerSecond,
         inputType: "number",
         name: "Targets Per Second",
       },
       {
         attribute: "targetWidth",
-        storeAction: actions.updateTargetWidth,
+        storeAction: gameConfigKeys.actions.updateTargetWidth,
         inputType: "number",
         name: "Target Width (px)",
       },
       {
         attribute: "accelerationEnabled",
-        storeAction: actions.updateAccelerationEnabled,
+        storeAction: gameConfigKeys.actions.updateAccelerationEnabled,
         inputType: "checkbox",
         name: "Acceleration Enabled",
       },

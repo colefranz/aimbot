@@ -23,7 +23,6 @@
 </template>
 
 <script lang="ts">
-import { actions } from "@stores/main-store";
 import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 
 @Component

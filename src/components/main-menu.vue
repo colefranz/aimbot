@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
-import { actions } from "@stores/main-store";
+import { viewKeys } from "@stores/view-store";
 import AbDialog from "@components/dialog.vue";
 import SettingsDialog from "@components/settings-dialog.vue";
 import AbButton from "@components/button.vue";
@@ -28,7 +28,7 @@ export default class MainMenu extends Vue {
   settingsVisible = false;
 
   goToGameView() {
-    this.$store.dispatch(actions.goToGameView);
+    this.$store.dispatch(viewKeys.actions.goToGameView);
   }
 
   openSettings() {
