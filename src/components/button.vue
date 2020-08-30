@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts">
-import { actions } from "@stores/main-store";
 import { Vue, Component, Prop } from "vue-property-decorator";
 import Target from "@components/target.vue";
 

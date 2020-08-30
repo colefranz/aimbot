@@ -4,8 +4,8 @@
     <div class="post-game-dialog__stats">
       <p>Score: {{ $store.state.gameState.score }}</p>
       <p>Lives: {{ $store.state.gameState.lives }}</p>
-      <p>Accuracy: {{ $store.getters.accuracy }}</p>
-      <p>Time: {{ $store.getters.gameTime }}</p>
+      <p>Accuracy: {{ $store.getters[gameStateKeys.getters.accuracy] }}</p>
+      <p>Time: {{ $store.getters[gameStateKeys.getters.gameTime] }}</p>
     </div>
     <AbButtonGroup>
       <AbButton @click="backToMainMenu()">Back to main menu</AbButton>
@@ -15,7 +15,8 @@
 </template>
 
 <script lang="ts">
-import { actions } from "@stores/main-store";
+import { viewKeys } from "@stores/view-store";
+import { gameStateKeys } from "@stores/game-state-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
 import Target from "@components/target.vue";
 import AbButton from "@components/button.vue";
@@ -25,12 +26,13 @@ import AbButtonGroup from "@components/button-group.vue";
   components: { AbButton, AbButtonGroup },
 })
 export default class PostGameDialog extends Vue {
+  gameStateKeys = gameStateKeys;
   restartGame() {
     this.$emit("restart");
   }
 
   backToMainMenu() {
-    this.$store.dispatch(actions.goToMainMenu);
+    this.$store.dispatch(viewKeys.actions.goToMainMenu);
   }
 }
 </script>

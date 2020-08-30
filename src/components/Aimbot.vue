@@ -9,14 +9,14 @@
 import { Vue, Component } from "vue-property-decorator";
 import GameView from "@components/game-view.vue";
 import MainMenu from "@components/main-menu.vue";
-import { Views } from "@stores/main-store";
+import { Views } from "@stores/view-store";
 
 @Component({
   components: { GameView, MainMenu },
 })
 export default class Aimbot extends Vue {
   displayGameView() {
-    return this.$store.state.currentView === Views.GameView;
+    return this.$store.state.view.currentView === Views.GameView;
   }
 }
 </script>

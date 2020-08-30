@@ -13,8 +13,8 @@
     <div class="game-view__footer">
       <p>Score: {{ $store.state.gameState.score }}</p>
       <p>Lives: {{ $store.state.gameState.lives }}</p>
-      <p>Accuracy: {{ $store.getters.accuracy }}</p>
-      <p>Time: {{ $store.getters.gameTime }}</p>
+      <p>Accuracy: {{ $store.getters[gameStateKeys.getters.accuracy] }}</p>
+      <p>Time: {{ $store.getters[gameStateKeys.getters.gameTime] }}</p>
     </div>
     <AbDialog v-if="gameEnded">
       <PostGameDialog v-on:restart="startGame"></PostGameDialog>
@@ -23,7 +23,8 @@
 </template>
 
 <script lang="ts">
-import { actions } from "@stores/main-store";
+import { gameStateKeys } from "@stores/game-state-store";
+import { viewKeys } from "@stores/view-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
 import Target from "./target.vue";
 import PostGameDialog from "./post-game-dialog.vue";
@@ -38,6 +39,7 @@ export default class GameView extends Vue {
   // what's wrong with types?? No `Timeout`
   targetProductionTimeout = null;
   clockTickTimeout = null;
+  gameStateKeys = gameStateKeys;
 
   created() {
     document.addEventListener("keydown", this.onKeyDown);
@@ -51,12 +53,12 @@ export default class GameView extends Vue {
   async startGame() {
     this.targetIds = [];
     await this.startClock();
-    await this.$store.dispatch(actions.resetGame);
+    await this.$store.dispatch(gameStateKeys.actions.resetGame);
     this.produceTarget();
   }
 
   async startClock() {
-    await this.$store.dispatch(actions.startGameClock);
+    await this.$store.dispatch(gameStateKeys.actions.startGameClock);
     this.tickClock();
   }
 
@@ -64,7 +66,7 @@ export default class GameView extends Vue {
     // should really only need to check every second but that could lead
     // to ugly behaviour as we miss by ms each time
     this.clockTickTimeout = setTimeout(() => {
-      this.$store.dispatch(actions.updateGameTime);
+      this.$store.dispatch(gameStateKeys.actions.updateGameTime);
       this.tickClock();
     }, 64);
   }
@@ -99,28 +101,28 @@ export default class GameView extends Vue {
   }
 
   endGame() {
-    this.$store.dispatch(actions.endGame);
+    this.$store.dispatch(gameStateKeys.actions.endGame);
   }
 
   goToMainMenu() {
-    this.$store.dispatch(actions.goToMainMenu);
+    this.$store.dispatch(viewKeys.actions.goToMainMenu);
   }
 
   handleTargetClicked(targetId: string) {
     if (!this.gameEnded) {
-      this.$store.dispatch(actions.targetClicked);
+      this.$store.dispatch(gameStateKeys.actions.targetClicked);
       this.spliceTarget(targetId);
     }
   }
 
   handleTargetExpired(targetId: string) {
-    this.$store.dispatch(actions.targetExpired);
+    this.$store.dispatch(gameStateKeys.actions.targetExpired);
     this.spliceTarget(targetId);
   }
 
   targetMissed() {
     if (!this.gameEnded) {
-      this.$store.dispatch(actions.clickMissed);
+      this.$store.dispatch(gameStateKeys.actions.clickMissed);
     }
   }
 
