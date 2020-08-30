@@ -55,4 +55,8 @@ body {
   height: var(--app-height);
   width: var(--app-width);
 }
+
+svg {
+  fill: $navy;
+}
 </style>
