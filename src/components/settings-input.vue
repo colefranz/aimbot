@@ -36,3 +36,16 @@ export default class SettingsInput extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+.settings-input {
+  display: grid;
+  align-items: center;
+  grid-auto-flow: column;
+}
+
+.settings-input input {
+  width: 70px;
+  justify-self: end;
+}
+</style>

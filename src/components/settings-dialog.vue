@@ -13,7 +13,9 @@
     </div>
     <AbButtonGroup>
       <AbButton @click="resetConfig()">Reset Config</AbButton>
-      <AbButton @click="$emit('close')" :primary="true">Back to main menu</AbButton>
+      <AbButton @click="$emit('close')" :primary="true"
+        >Back to main menu</AbButton
+      >
     </AbButtonGroup>
   </div>
 </template>
@@ -60,6 +62,20 @@ export default class SettingsDialog extends Vue {
 
 <style lang="scss">
 .settings-dialog {
-  display: contents;
+  display: grid;
+  color: #fff;
+}
+
+.settings-dialog .button-group {
+  align-self: end;
+}
+
+.settings-dialog .ab-button {
+  box-shadow: 0px 2px 5px black;
+}
+
+.settings-dialog__settings {
+  display: grid;
+  grid-auto-flow: row;
 }
 </style>

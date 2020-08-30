@@ -2,8 +2,12 @@
   <div class="main-menu">
     <AbLogo></AbLogo>
     <AbButtonGroup>
-      <AbButton @click="openSettings()"><SvgOptions /></AbButton>
-      <AbButton @click="goToGameView()" :primary="true">Time Trial</AbButton>
+      <AbButton @click="goToGameView()" :primary="true"
+        ><TimerSvg />Time Trial</AbButton
+      >
+      <AbButton @click="openSettings()" title="Customize Settings"
+        ><OptionsSvg
+      /></AbButton>
     </AbButtonGroup>
     <AbDialog v-if="settingsVisible">
       <SettingsDialog v-on:close="closeSettings()"></SettingsDialog>
@@ -19,10 +23,19 @@ import SettingsDialog from "@components/settings-dialog.vue";
 import AbButton from "@components/button.vue";
 import AbButtonGroup from "@components/button-group.vue";
 import AbLogo from "@components/logo.vue";
-import SvgOptions from "@svg/icon-options.svg";
+import OptionsSvg from "@svg/icon-options.svg";
+import TimerSvg from "@svg/icon-timer.svg";
 
 @Component({
-  components: { AbButton, AbButtonGroup, AbDialog, AbLogo, SettingsDialog, SvgOptions },
+  components: {
+    AbButton,
+    AbButtonGroup,
+    AbDialog,
+    AbLogo,
+    SettingsDialog,
+    OptionsSvg,
+    TimerSvg,
+  },
 })
 export default class MainMenu extends Vue {
   settingsVisible = false;

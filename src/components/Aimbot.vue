@@ -23,13 +23,18 @@ export default class Aimbot extends Vue {
 
 <style lang="scss">
 :root {
-  font-family: Roboto, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: $background-color;
 
   --app-height: 600px;
   --app-width: 600px;
+  overflow: hidden;
+}
+
+:root * {
+  font-family: Calibri, Roboto, sans-serif !important;
+  font-size: 22px;
 }
 
 body {

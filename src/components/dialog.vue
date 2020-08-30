@@ -20,11 +20,10 @@ $dialog-green: $peach;
   transform: translate(-50%, -50%);
   display: grid;
   grid-auto-rows: column;
-  justify-items: center;
-  align-items: center;
+  padding: 30px;
   width: 80%;
   height: 80%;
-  background: $background-color;
+  background: $game-background-color;
   box-shadow: 0px 5px 20px $background-accent;
 }
 </style>
