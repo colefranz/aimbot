@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "dev": "webpack --config webpack.config.js --mode development --color",
-    "w": "webpack --config webpack.config.js --mode development -w --color",
+    "w": "webpack-dev-server --open --color --mode development --config webpack.config.js",
     "package": "webpack --config webpack.config.js --mode production"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "css-loader": "^4.2.2",
     "eslint": "^7.7.0",
     "eslint-plugin-vue": "^6.2.2",
+    "html-webpack-plugin": "^4.4.0",
     "mini-css-extract-plugin": "^0.10.0",
     "sass": "^1.26.10",
     "sass-loader": "^10.0.0",
@@ -38,6 +39,7 @@
     "vue-class-component": "^7.2.5",
     "vue-loader": "^15.9.3",
     "vue-property-decorator": "^9.0.0",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }
