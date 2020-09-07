@@ -146,6 +146,7 @@ export default class GameView extends Vue {
 
   onKeyDown(event: KeyboardEvent) {
     if (event.key === "Escape") {
+      event.preventDefault();
       this.endGame();
     }
   }

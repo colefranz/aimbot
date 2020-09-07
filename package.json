@@ -4,8 +4,9 @@
   "description": "used to improve accuracy with a mouse making you into a human aimbot",
   "main": "src/main.js",
   "scripts": {
-    "dev": "webpack --config webpack.config.js --mode development --color",
-    "w": "webpack-dev-server --open --color --mode development --config webpack.config.js",
+    "build": "webpack --config webpack.config.js --mode development --color",
+    "dev": "webpack-dev-server --open --color --mode development --config webpack.config.js",
+    "w": "webpack --color --mode development --config webpack.config.js -w",
     "package": "webpack --config webpack.config.js --mode production"
   },
   "repository": {
@@ -20,8 +21,7 @@
   "homepage": "https://github.com/colefranz/aimbot#readme",
   "dependencies": {
     "vue": "^2.6.12",
-    "vuex": "^3.5.1",
-    "webpack": "^4.44.1"
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@types/node": "^14.6.0",
@@ -41,6 +41,7 @@
     "vue-property-decorator": "^9.0.0",
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   }

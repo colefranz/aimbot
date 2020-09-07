@@ -27,9 +27,10 @@ export default class Aimbot extends Vue {
   -moz-osx-font-smoothing: grayscale;
   background: $background-color;
   color: $text-color;
-
   --app-height: 600px;
-  --app-width: 600px;
+  --app-width: 640px;
+  height: var(--app-height);
+  width: var(--app-width);
   overflow: hidden;
 }
 
@@ -42,6 +43,7 @@ body {
   display: grid;
   justify-items: center;
   align-items: center;
+  margin: 0;
 }
 
 * {
