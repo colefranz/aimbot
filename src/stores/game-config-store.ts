@@ -81,7 +81,9 @@ export const gameConfig = {
       state.accelerationEnabled = accelerationEnabled;
     },
     [mutations.setGameConfig](state, gameConfig) {
-      Vue.set(state, 'gameConfig', gameConfig);
+      Object.keys(gameConfig).forEach(key => {
+        Vue.set(state, key, gameConfig[key]);
+      });
     },
   },
 };

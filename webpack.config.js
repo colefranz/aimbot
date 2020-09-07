@@ -62,7 +62,7 @@ module.exports = {
     alias: {
       "@components": path.resolve(__dirname, "src/components/"),
       "@stores": path.resolve(__dirname, "src/stores/"),
-      "@svg": path.resolve(__dirname, "svg/ink/"),
+      "@svg": path.resolve(__dirname, "svg/opt/"),
     },
   },
   plugins: [

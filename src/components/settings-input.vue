@@ -46,6 +46,7 @@ export default class SettingsInput extends Vue {
 .settings-input input {
   width: 70px;
   justify-self: end;
+  color: $text-color;
 }
 
 .settings-input input[type="checkbox"] {

@@ -26,6 +26,7 @@ export default class Aimbot extends Vue {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: $background-color;
+  color: $text-color;
 
   --app-height: 600px;
   --app-width: 600px;
@@ -58,7 +59,11 @@ body {
   width: var(--app-width);
 }
 
-svg {
+svg[xmlns] {
+  width: 24px;
+  height: 24px;
   fill: $navy;
+  stroke: $navy;
+  color: $navy;
 }
 </style>

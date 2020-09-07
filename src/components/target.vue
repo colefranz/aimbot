@@ -10,7 +10,6 @@
       ref="svg"
       class="target__svg"
       version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
       v-on:animationend="finish('expired')"
       v-on:click.stop.prevent="finish('clicked')"
       :width="width"

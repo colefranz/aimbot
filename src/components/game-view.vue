@@ -10,12 +10,12 @@
         :gameEnded="gameEnded"
       ></Target>
     </div>
-    <div class="game-view__footer">
+    <footer class="game-view__footer">
       <p>Score: {{ $store.state.gameState.score }}</p>
       <p>Lives: {{ $store.state.gameState.lives }}</p>
       <p>Accuracy: {{ $store.getters[gameStateKeys.getters.accuracy] }}</p>
       <p>Time: {{ $store.getters[gameStateKeys.getters.gameTime] }}</p>
-    </div>
+    </footer>
     <AbDialog v-if="gameEnded">
       <PostGameDialog v-on:restart="startGame"></PostGameDialog>
     </AbDialog>
