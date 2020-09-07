@@ -9,10 +9,8 @@
       <p>Time: {{ $store.getters[gameStateKeys.getters.gameTime] }}</p>
     </div>
     <AbButtonGroup>
-      <AbButton @click="backToMainMenu()"><HomeSvg />Main Menu</AbButton>
-      <AbButton @click="restartGame()" :primary="true"
-        ><ResetSvg />Play again</AbButton
-      >
+      <AbButton @click="backToMainMenu()"><HomeSvg class="icon"></HomeSvg>Main Menu</AbButton>
+      <AbButton @click="restartGame()" :primary="true"><ResetSvg class="icon"></ResetSvg>Play again</AbButton>
     </AbButtonGroup>
   </div>
 </template>

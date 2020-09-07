@@ -9,6 +9,14 @@
         :targetId="targetId"
         :gameEnded="gameEnded"
       ></Target>
+      <div class="game-view__lives">
+        <HeartSVG
+          v-for="heartNumber in 3"
+          class="game-view__life"
+          :key="heartNumber"
+          :class="{ 'game-view__life--missing': heartNumber > currentLives }"
+        ></HeartSVG>
+      </div>
     </div>
     <footer class="game-view__footer">
       <p>Score: {{ $store.state.gameState.score }}</p>
@@ -30,9 +38,10 @@ import Target from "./target.vue";
 import PostGameDialog from "./post-game-dialog.vue";
 import AbDialog from "./dialog.vue";
 import AbButton from "@components/button.vue";
+import HeartSVG from "@svg/icon-heart.svg";
 
 @Component({
-  components: { AbButton, PostGameDialog, AbDialog, Target },
+  components: { AbButton, PostGameDialog, AbDialog, HeartSVG, Target },
 })
 export default class GameView extends Vue {
   targetIds: string[] = [];
@@ -141,6 +150,10 @@ export default class GameView extends Vue {
     }
   }
 
+  get currentLives() {
+    return this.$store.state.gameState.lives;
+  }
+
   get gameEnded() {
     return this.$store.state.gameState.lives <= 0;
   }
@@ -164,6 +177,9 @@ export default class GameView extends Vue {
   grid-template-areas:
     "game-area"
     "footer";
+  * {
+    user-select: none;
+  }
 }
 
 .game-view__game-area {
@@ -183,5 +199,30 @@ export default class GameView extends Vue {
   justify-items: center;
   align-items: center;
   grid-auto-flow: column;
+}
+
+.game-view__lives {
+  position: absolute;
+  z-index: 0;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.game-view__life {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+  margin: 5px;
+  path {
+    stroke: $light;
+    fill: $light;
+  }
+}
+
+.game-view__life--missing {
+  path {
+    fill: none;
+  }
 }
 </style>

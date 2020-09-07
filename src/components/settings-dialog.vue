@@ -13,8 +13,8 @@
     </div>
     <AbButtonGroup>
       <AbButton @click="saveAsDefaults()" title="Save as Defaults">Save as Defaults</AbButton>
-      <AbButton @click="resetConfig()" title="Reset Config"><ResetSvg />Reset Config</AbButton>
-      <AbButton @click="$emit('close')" :primary="true"><HomeSvg />Main Menu</AbButton>
+      <AbButton @click="resetConfig()" title="Reset Config"><ResetSvg class="icon"></ResetSvg>Reset Config</AbButton>
+      <AbButton @click="$emit('close')" :primary="true"><HomeSvg class="icon"></HomeSvg>Main Menu</AbButton>
     </AbButtonGroup>
   </div>
 </template>

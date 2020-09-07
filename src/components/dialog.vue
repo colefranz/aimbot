@@ -15,6 +15,7 @@ export default class AbDialog extends Vue {}
 $dialog-green: $peach;
 .slotted-dialog {
   position: absolute;
+  z-index: 10;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

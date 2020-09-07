@@ -59,7 +59,7 @@ body {
   width: var(--app-width);
 }
 
-svg[xmlns] {
+.icon {
   width: 24px;
   height: 24px;
   fill: $navy;

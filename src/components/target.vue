@@ -95,6 +95,7 @@ $target-inside: $light;
 
 .target {
   position: absolute;
+  z-index: 1;
   pointer-events: none;
   overflow: visible;
 }
