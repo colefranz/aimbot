@@ -39,6 +39,8 @@ import PostGameDialog from "./post-game-dialog.vue";
 import AbDialog from "./dialog.vue";
 import AbButton from "@components/button.vue";
 import HeartSVG from "@svg/icon-heart.svg";
+import popWav from "@sounds/pop.wav";
+import wooshWav from "@sounds/woosh.wav";
 
 @Component({
   components: { AbButton, PostGameDialog, AbDialog, HeartSVG, Target },
@@ -117,9 +119,13 @@ export default class GameView extends Vue {
     this.$store.dispatch(viewKeys.actions.goToMainMenu);
   }
 
-  handleTargetClicked(targetId: string) {
+  handleTargetClicked(targetId: string, clickStats) {
     if (!this.gameEnded) {
+      const popSound = new Audio(popWav as any);
+      popSound.play();
+
       this.$store.dispatch(gameStateKeys.actions.targetClicked);
+      this.$store.dispatch(gameStateKeys.actions.newClickStats, clickStats);
       this.spliceTarget(targetId);
     }
   }
@@ -131,6 +137,8 @@ export default class GameView extends Vue {
 
   targetMissed() {
     if (!this.gameEnded) {
+      const wooshSound = new Audio(wooshWav as any);
+      wooshSound.play();
       this.$store.dispatch(gameStateKeys.actions.clickMissed);
     }
   }

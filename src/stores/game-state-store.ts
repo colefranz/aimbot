@@ -6,6 +6,11 @@ Vue.use(Vuex);
 
 const DEFAULT_LIVES = 3;
 
+export type ClickStats = {
+  xOffsetPercentage: number;
+  yOffsetPercentage: number;
+};
+
 export enum getters {
   accuracy = 'accuracy',
   gameTime = 'gameTime',
@@ -19,6 +24,7 @@ export enum actions {
   targetExpired = 'targetExpired',
   clickMissed = 'clickMissed',
   endGame = 'endGame',
+  newClickStats = 'addClickStats',
 }
 
 export enum mutations {
@@ -29,6 +35,7 @@ export enum mutations {
   decrementLives = 'decrementLives',
   setLives = 'setLives',
   incrementClicksMissed = 'incrementClicksMissed',
+  addClickStats = 'addClickStats',
 }
 
 const namespace = 'gameState';
@@ -48,6 +55,7 @@ export const gameState = {
     startTime: 0,
     currentTime: 0,
     clicksMissed: 0,
+    clickStats: [] as ClickStats[],
   },
   getters: {
     [getters.accuracy](state) {
@@ -71,7 +79,7 @@ export const gameState = {
   },
   actions: {
     [actions.resetGame]({ commit, rootState }) {
-      commit(mutations.resetGameState, rootState.gameConfig.lives);
+      commit(mutations.resetGameState);
     },
     [actions.startGameClock]({ commit }) {
       commit(mutations.setStartTime, new Date().getTime());
@@ -92,12 +100,16 @@ export const gameState = {
     [actions.endGame]({ commit }) {
       commit(mutations.setLives, 0);
     },
+    [actions.newClickStats]({ commit }, clickStats) {
+      commit(mutations.addClickStats, clickStats);
+    },
   },
   mutations: {
-    [mutations.resetGameState](state, gameConfig) {
+    [mutations.resetGameState](state) {
       state.score = 0;
       state.lives = DEFAULT_LIVES;
       state.clicksMissed = 0;
+      state.clickStats = [];
     },
     [mutations.setStartTime](state, time: number) {
       state.startTime = time;
@@ -116,6 +128,9 @@ export const gameState = {
     },
     [mutations.incrementClicksMissed](state) {
       state.clicksMissed++;
+    },
+    [mutations.addClickStats](state, clickStats: ClickStats) {
+      state.clickStats.push(clickStats);
     },
   },
 };

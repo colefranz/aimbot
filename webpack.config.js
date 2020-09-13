@@ -56,6 +56,13 @@ module.exports = {
         test: /\.svg$/,
         use: ["vue-svg-loader"],
       },
+      {
+        test: /\.wav$/,
+        loader: "file-loader",
+        query: {
+          name: "./sounds/[name].[hash:8].[ext]",
+        },
+      },
     ],
   },
   resolve: {
@@ -64,6 +71,7 @@ module.exports = {
       "@components": path.resolve(__dirname, "src/components/"),
       "@stores": path.resolve(__dirname, "src/stores/"),
       "@svg": path.resolve(__dirname, "svg/opt/"),
+      "@sounds": path.resolve(__dirname, "sounds/"),
     },
   },
   plugins: [
