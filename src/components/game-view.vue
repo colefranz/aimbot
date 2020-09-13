@@ -18,13 +18,7 @@
         ></HeartSVG>
       </div>
     </div>
-    <footer class="game-view__footer">
-      <p>Score: {{ $store.state.gameState.score }}</p>
-      <p>Lives: {{ $store.state.gameState.lives }}</p>
-      <p>Accuracy: {{ $store.getters[gameStateKeys.getters.accuracy] }}</p>
-      <p>Time: {{ $store.getters[gameStateKeys.getters.gameTime] }}</p>
-      <p>Targets/s: {{ $store.getters[gameStateKeys.getters.targetsPerSecond] }}</p>
-    </footer>
+    <GameStats class="game-view__footer"></GameStats>
     <AbDialog v-if="gameEnded">
       <PostGameDialog v-on:restart="startGame"></PostGameDialog>
     </AbDialog>
@@ -35,23 +29,23 @@
 import { gameStateKeys } from "@stores/game-state-store";
 import { viewKeys } from "@stores/view-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
-import Target from "./target.vue";
-import PostGameDialog from "./post-game-dialog.vue";
-import AbDialog from "./dialog.vue";
+import Target from "@components/target.vue";
+import GameStats from "@components/game-stats.vue";
+import PostGameDialog from "@components/post-game-dialog.vue";
+import AbDialog from "@components/dialog.vue";
 import AbButton from "@components/button.vue";
 import HeartSVG from "@svg/icon-heart.svg";
 import popWav from "@sounds/pop.wav";
 import wooshWav from "@sounds/woosh.wav";
 
 @Component({
-  components: { AbButton, PostGameDialog, AbDialog, HeartSVG, Target },
+  components: { AbButton, AbDialog, GameStats, PostGameDialog, HeartSVG, Target },
 })
 export default class GameView extends Vue {
   targetIds: string[] = [];
   // what's wrong with types?? No `Timeout`
   targetProductionTimeout = null;
   clockTickTimeout = null;
-  gameStateKeys = gameStateKeys;
 
   created() {
     document.addEventListener("keydown", this.onKeyDown);

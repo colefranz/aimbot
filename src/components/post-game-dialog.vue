@@ -2,15 +2,7 @@
   <div class="post-game-dialog">
     <!-- It would be cool to put skull and crossbones here! -->
     <div class="post-game-dialog__game-over-banner">Game Over!</div>
-    <div class="post-game-dialog__text-stats">
-      <p class="post-game-dialog__stats-entry">Score: {{ $store.state.gameState.score }}</p>
-      <p class="post-game-dialog__stats-entry">Lives: {{ $store.state.gameState.lives }}</p>
-      <p class="post-game-dialog__stats-entry">Accuracy: {{ $store.getters[gameStateKeys.getters.accuracy] }}</p>
-      <p class="post-game-dialog__stats-entry">Time: {{ $store.getters[gameStateKeys.getters.gameTime] }}</p>
-      <p class="post-game-dialog__stats-entry">
-        Targets/s: {{ $store.getters[gameStateKeys.getters.targetsPerSecond] }}
-      </p>
-    </div>
+    <GameStats class="post-game-dialog__game-stats"></GameStats>
     <TargetStats class="post-game-dialog__target-stats"></TargetStats>
     <AbButtonGroup class="post-game-dailog__actions">
       <AbButton @click="backToMainMenu()"><HomeSvg class="icon"></HomeSvg>Main Menu</AbButton>
@@ -21,9 +13,9 @@
 
 <script lang="ts">
 import { viewKeys } from "@stores/view-store";
-import { gameStateKeys } from "@stores/game-state-store";
 import { Vue, Component, Watch } from "vue-property-decorator";
 import Target from "@components/target.vue";
+import GameStats from "@components/game-stats.vue";
 import AbButton from "@components/button.vue";
 import AbButtonGroup from "@components/button-group.vue";
 import TargetStats from "@components/target-stats.vue";
@@ -31,10 +23,9 @@ import HomeSvg from "@svg/icon-home.svg";
 import ResetSvg from "@svg/icon-reset.svg";
 
 @Component({
-  components: { AbButton, AbButtonGroup, HomeSvg, ResetSvg, TargetStats },
+  components: { AbButton, AbButtonGroup, GameStats, HomeSvg, ResetSvg, TargetStats },
 })
 export default class PostGameDialog extends Vue {
-  gameStateKeys = gameStateKeys;
   restartGame() {
     this.$emit("restart");
   }
@@ -51,7 +42,7 @@ export default class PostGameDialog extends Vue {
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header header"
-    "text-stats target-stats"
+    "game-stats target-stats"
     "footer footer";
 }
 
@@ -64,12 +55,16 @@ export default class PostGameDialog extends Vue {
   border-bottom: 1px solid #fff;
 }
 
-.post-game-dialog__text-stats {
-  grid-area: text-stats;
+.post-game-dialog__game-stats {
+  grid-area: game-stats;
   display: grid;
   align-items: center;
   justify-items: center;
   grid-auto-rows: min-content;
+
+  p {
+    margin: 10px;
+  }
 }
 
 .post-game-dialog__target-stats {
@@ -78,10 +73,6 @@ export default class PostGameDialog extends Vue {
 
 .post-game-dialog .button-group {
   align-self: end;
-}
-
-.post-game-dialog__stats-entry {
-  margin: 10px;
 }
 
 .post-game-dailog__actions {
