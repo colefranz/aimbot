@@ -15,6 +15,7 @@ module.exports = {
   devServer: {
     contentBase: "./dist",
     port: 9000,
+    publicPath: "/",
   },
   stats: { children: false },
   module: {
@@ -71,7 +72,7 @@ module.exports = {
       filename: "style.css",
     }),
     new HtmlWebpackPlugin({
-      template: "./aimbot.html",
+      template: "./src/aimbot.html",
     }),
   ],
 };

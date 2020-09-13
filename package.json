@@ -5,9 +5,9 @@
   "main": "src/main.js",
   "scripts": {
     "build": "webpack --config webpack.config.js --mode development --color",
-    "dev": "webpack-dev-server --open --color --mode development --config webpack.config.js",
+    "dev": "webpack-dev-server --open --color --mode development --config webpack.config.js -w",
     "w": "webpack --color --mode development --config webpack.config.js -w",
-    "package": "webpack --config webpack.config.js --mode production"
+    "package": "webpack --config webpack.config.js --mode production --color && package.sh"
   },
   "repository": {
     "type": "git",
