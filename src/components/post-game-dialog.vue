@@ -7,6 +7,9 @@
       <p class="post-game-dialog__stats-entry">Lives: {{ $store.state.gameState.lives }}</p>
       <p class="post-game-dialog__stats-entry">Accuracy: {{ $store.getters[gameStateKeys.getters.accuracy] }}</p>
       <p class="post-game-dialog__stats-entry">Time: {{ $store.getters[gameStateKeys.getters.gameTime] }}</p>
+      <p class="post-game-dialog__stats-entry">
+        Targets/s: {{ $store.getters[gameStateKeys.getters.targetsPerSecond] }}
+      </p>
     </div>
     <TargetStats class="post-game-dialog__target-stats"></TargetStats>
     <AbButtonGroup class="post-game-dailog__actions">

@@ -23,6 +23,7 @@
       <p>Lives: {{ $store.state.gameState.lives }}</p>
       <p>Accuracy: {{ $store.getters[gameStateKeys.getters.accuracy] }}</p>
       <p>Time: {{ $store.getters[gameStateKeys.getters.gameTime] }}</p>
+      <p>Targets/s: {{ $store.getters[gameStateKeys.getters.targetsPerSecond] }}</p>
     </footer>
     <AbDialog v-if="gameEnded">
       <PostGameDialog v-on:restart="startGame"></PostGameDialog>
@@ -86,7 +87,9 @@ export default class GameView extends Vue {
     const accelerationEnabled = this.$store.state.gameConfig.accelerationEnabled;
     const timeElapsed = new Date().getTime() - this.$store.state.gameState.startTime;
     const extraTargetsPerSecond = accelerationEnabled ? (timeElapsed / 30000) * 0.5 : 0;
-    const currentTimeBetween = 1000 / (this.$store.state.gameConfig.targetsPerSecond + extraTargetsPerSecond);
+    const targetsPerSecond = this.$store.state.gameConfig.targetsPerSecond + extraTargetsPerSecond;
+    this.$store.dispatch(gameStateKeys.actions.updateTargetsPerSecond, targetsPerSecond); // TODO redo this !! yucK!! eww!!
+    const currentTimeBetween = 1000 / targetsPerSecond;
     this.targetProductionTimeout = setTimeout(() => {
       function guid() {
         var s4 = function() {

@@ -14,6 +14,7 @@ export type ClickStats = {
 export enum getters {
   accuracy = 'accuracy',
   gameTime = 'gameTime',
+  targetsPerSecond = 'targetsPerSecond',
 }
 
 export enum actions {
@@ -25,6 +26,7 @@ export enum actions {
   clickMissed = 'clickMissed',
   endGame = 'endGame',
   newClickStats = 'addClickStats',
+  updateTargetsPerSecond = 'updateTargetsPerSecond',
 }
 
 export enum mutations {
@@ -36,6 +38,7 @@ export enum mutations {
   setLives = 'setLives',
   incrementClicksMissed = 'incrementClicksMissed',
   addClickStats = 'addClickStats',
+  setTargetsPerSecond = 'setTargetsPerSecond',
 }
 
 const namespace = 'gameState';
@@ -56,6 +59,7 @@ export const gameState = {
     currentTime: 0,
     clicksMissed: 0,
     clickStats: [] as ClickStats[],
+    targetsPerSecond: 0,
   },
   getters: {
     [getters.accuracy](state) {
@@ -75,6 +79,9 @@ export const gameState = {
       const dateWithMsElapsed = new Date(0);
       dateWithMsElapsed.setMilliseconds(msElapsed);
       return dateWithMsElapsed.toISOString().substr(14, 5);
+    },
+    [getters.targetsPerSecond](state) {
+      return `${state.targetsPerSecond.toFixed(1)}`;
     },
   },
   actions: {
@@ -103,6 +110,9 @@ export const gameState = {
     [actions.newClickStats]({ commit }, clickStats) {
       commit(mutations.addClickStats, clickStats);
     },
+    [actions.updateTargetsPerSecond]({ commit }, targetsPerSecond) {
+      commit(mutations.setTargetsPerSecond, targetsPerSecond);
+    },
   },
   mutations: {
     [mutations.resetGameState](state) {
@@ -110,6 +120,7 @@ export const gameState = {
       state.lives = DEFAULT_LIVES;
       state.clicksMissed = 0;
       state.clickStats = [];
+      state.targetsPerSecond = 0;
     },
     [mutations.setStartTime](state, time: number) {
       state.startTime = time;
@@ -131,6 +142,9 @@ export const gameState = {
     },
     [mutations.addClickStats](state, clickStats: ClickStats) {
       state.clickStats.push(clickStats);
+    },
+    [mutations.setTargetsPerSecond](state, targetsPerSecond: number) {
+      state.targetsPerSecond = targetsPerSecond;
     },
   },
 };
